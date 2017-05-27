@@ -1,0 +1,10 @@
+c:\users\insight\documents\visual studio 2015\Projects\Level5TextReader\Level5TextReader.Shared\bin\Debug\Level5TextReader.Shared.dll
+c:\users\insight\documents\visual studio 2015\Projects\Level5TextReader\Level5TextReader.Shared\bin\Debug\Level5TextReader.Shared.pdb
+c:\users\insight\documents\visual studio 2015\Projects\Level5TextReader\Level5TextReader.Shared\obj\Debug\Level5TextReader.Shared.csprojResolveAssemblyReference.cache
+c:\users\insight\documents\visual studio 2015\Projects\Level5TextReader\Level5TextReader.Shared\obj\Debug\Level5TextReader.Shared.dll
+c:\users\insight\documents\visual studio 2015\Projects\Level5TextReader\Level5TextReader.Shared\obj\Debug\Level5TextReader.Shared.pdb
+C:\Users\Insight\Desktop\Neuer Ordner\Level5TextReader\Level5TextReader.Shared\bin\Debug\Level5TextReader.Shared.dll
+C:\Users\Insight\Desktop\Neuer Ordner\Level5TextReader\Level5TextReader.Shared\bin\Debug\Level5TextReader.Shared.pdb
+C:\Users\Insight\Desktop\Neuer Ordner\Level5TextReader\Level5TextReader.Shared\obj\Debug\Level5TextReader.Shared.csprojResolveAssemblyReference.cache
+C:\Users\Insight\Desktop\Neuer Ordner\Level5TextReader\Level5TextReader.Shared\obj\Debug\Level5TextReader.Shared.dll
+C:\Users\Insight\Desktop\Neuer Ordner\Level5TextReader\Level5TextReader.Shared\obj\Debug\Level5TextReader.Shared.pdb

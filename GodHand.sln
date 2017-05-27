@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.7
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GodHand.Client", "GodHand.Client\GodHand.Client.csproj", "{E39EB817-3838-4A0E-8E96-581C1D2D7B7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GodHand.Shared", "GodHand.Shared\GodHand.Shared.csproj", "{3C184AE4-3824-4613-9BCF-CE86142536F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kakasi.NET.Interop", "Kakasi.Net\Kakasi.NET.Interop\Kakasi.NET.Interop.csproj", "{67F3DAA6-417D-4F5D-81C4-A191B04F917B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E39EB817-3838-4A0E-8E96-581C1D2D7B7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E39EB817-3838-4A0E-8E96-581C1D2D7B7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E39EB817-3838-4A0E-8E96-581C1D2D7B7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E39EB817-3838-4A0E-8E96-581C1D2D7B7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C184AE4-3824-4613-9BCF-CE86142536F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C184AE4-3824-4613-9BCF-CE86142536F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C184AE4-3824-4613-9BCF-CE86142536F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C184AE4-3824-4613-9BCF-CE86142536F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67F3DAA6-417D-4F5D-81C4-A191B04F917B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67F3DAA6-417D-4F5D-81C4-A191B04F917B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67F3DAA6-417D-4F5D-81C4-A191B04F917B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67F3DAA6-417D-4F5D-81C4-A191B04F917B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
