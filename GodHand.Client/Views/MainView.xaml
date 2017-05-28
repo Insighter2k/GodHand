@@ -7,9 +7,30 @@
         xmlns:client="clr-namespace:GodHand.Client"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:cal="http://www.caliburnproject.org"
+        xmlns:viewModel="clr-namespace:GodHand.Client.ViewModels"
+        xmlns:views="clr-namespace:GodHand.Client.Views"
         mc:Ignorable="d"
-        Title="GodHand - powered by Insight2k" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        WindowStartupLocation="CenterScreen" WindowState="Maximized"
+                      cal:Message.Attach="[Event Loaded]=[Action View_Loaded()]">
     
+    <controls:MetroWindow.RightWindowCommands>
+        <controls:WindowCommands>
+            <Button Name="BtnShowSettings" cal:Message.Attach="[Event Click] = [Action BtnShowSettings()]">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="15"
+                               Height="15"
+                               Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_settings}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Margin="4 0 0 0"
+                               VerticalAlignment="Center"                               
+                               Text="Settings" />
+                </StackPanel>
+            </Button>
+        </controls:WindowCommands>
+    </controls:MetroWindow.RightWindowCommands>
     
     <Grid>
         <Grid.ColumnDefinitions>
@@ -58,5 +79,23 @@
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
+
+    <!--<controls:MetroWindow.Flyouts>
+        <controls:FlyoutsControl ItemsSource="{Binding Flyouts}">
+            <controls:FlyoutsControl.ItemContainerStyle>
+                <Style BasedOn="{StaticResource {x:Type controls:Flyout}}" TargetType="{x:Type controls:Flyout}">
+                    --><!--<Setter Property="Header" Value="{Binding Header}" />--><!--
+                    <Setter Property="IsOpen" Value="{Binding IsOpen}" />
+                    <Setter Property="Position" Value="{Binding Position}" />
+                    <Setter Property="Theme" Value="Adapt" />
+                </Style>
+            </controls:FlyoutsControl.ItemContainerStyle>
+            <controls:FlyoutsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type viewModel:SettingsViewModel}">
+                    <views:SettingsView/>
+                </DataTemplate>
+            </controls:FlyoutsControl.ItemTemplate>
+        </controls:FlyoutsControl>
+    </controls:MetroWindow.Flyouts>-->
 </controls:MetroWindow>
 

@@ -1,10 +1,12 @@
 ﻿using System.Collections.ObjectModel;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
+using Caliburn.Micro;
 using GodHand.Shared.IO;
 using GodHand.Shared.Models;
 using Screen = Caliburn.Micro.Screen;
@@ -14,6 +16,8 @@ namespace GodHand.Client.ViewModels
 {
     public class MainViewModel : Screen
     {
+        WindowManager winMan = new WindowManager();
+
         public MainViewModel()
         {
             DisplayName = "GodHand - Japanese Game Translator - powered by Insight2k";
@@ -103,10 +107,36 @@ namespace GodHand.Client.ViewModels
         }
         public ByteInformation SelectedCollection { get; set; }
 
+        //private ObservableCollection<Screen> _flyouts = new ObservableCollection<Screen>();
+        //public ObservableCollection<Screen> Flyouts
+        //{
+        //    get => _flyouts;
+        //    set
+        //    {
+        //        _flyouts = value;
+        //        NotifyOfPropertyChange(() => Flyouts);
+        //    }
+        //}
+
         #endregion
 
         #region Methods
-        
+
+        public void BtnShowSettings()
+        {
+            //var flyout = Flyouts[0];
+            //((IFlyout) flyout).IsOpen = !((IFlyout) flyout).IsOpen;
+            dynamic settings = new ExpandoObject();
+            settings.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            settings.ResizeMode = ResizeMode.NoResize;
+            settings.MinWidth = 450;
+            settings.MinHeight = 200;
+            
+            
+
+            winMan.ShowDialog(SettingsViewModel.Create(),null, settings);
+        }
+
         public void BtnSelectFile()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -151,6 +181,11 @@ namespace GodHand.Client.ViewModels
 
         #region Events
 
+        public void View_Loaded()
+        {
+            //Flyouts.Add(SettingsViewModel.Create());
+        }
+
         public void Dg_CellEditEnding(DataGridCellEditEndingEventArgs e)
         {
             var element = e.EditingElement as System.Windows.Controls.TextBox;
@@ -171,12 +206,5 @@ namespace GodHand.Client.ViewModels
         }
 
         #endregion
-
-
-
-
-
-
-
     }
 }
