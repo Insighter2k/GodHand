@@ -50,6 +50,7 @@
     <ProjectReference Include="..\Kakasi.Net\Kakasi.NET.Interop\Kakasi.NET.Interop.csproj">
       <Project>{67f3daa6-417d-4f5d-81c4-a191b04f917b}</Project>
       <Name>Kakasi.NET.Interop</Name>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
