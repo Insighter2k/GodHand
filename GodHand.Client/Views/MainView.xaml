@@ -4,8 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:client="clr-namespace:GodHand.Client"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:cal="http://www.caliburnproject.org"
         mc:Ignorable="d"
         Title="GodHand - powered by Insight2k" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+    
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -40,13 +45,15 @@
         <Label Grid.Column="8" Grid.Row="1" Content="Offset Length:" FontWeight="Bold" VerticalContentAlignment="Center"/>
         <TextBox Grid.Column="9" Grid.Row="1" Name="TbxOffsetLength" Margin="5" />
 
-        <DataGrid Name="Collection"  Grid.Row="2" Grid.ColumnSpan="10" Margin="5" AutoGenerateColumns="False">
-           <DataGrid.Columns>
-               <DataGridTextColumn Header="Current Value" Binding="{Binding CurrentValue, Mode=OneWay}" />
-                <DataGridTextColumn Header="Current Length" Binding="{Binding ByteValueLength, Mode=OneWay}" />
-                <DataGridTextColumn Header="New Value" Binding="{Binding NewValue}" />
-               <DataGridTextColumn Header="New Value Length" Binding="{Binding NewValueLength, Mode=OneWay}" />
-               <DataGridTextColumn Header="Romaji Translation" Binding="{Binding RomajiTranslation, Mode=OneWay}" />
+        <DataGrid Name="Collection" SelectedItem="{Binding SelectedCollection}" Grid.Row="2" Grid.ColumnSpan="10" Margin="5" AutoGenerateColumns="False" SelectionMode="Single"
+                 cal:Message.Attach="
+                  [Event CellEditEnding] = [Action Dg_CellEditEnding($eventArgs)]">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Current Value" Binding="{Binding CurrentValue, Mode=OneWay}" />
+                <DataGridTextColumn Header="Length" Binding="{Binding ByteValueLength, Mode=OneWay}" />
+                <DataGridTextColumn Header="New Value" Binding="{Binding NewValue, ValidatesOnExceptions=True}" />
+                <DataGridTextColumn Header="New Length" Binding="{Binding NewValueLength, Mode=OneWay}" />
+                <DataGridTextColumn Header="Romaji Translation" Binding="{Binding RomajiTranslation, Mode=OneWay}" />
                 <DataGridCheckBoxColumn Header="Changes?" Binding="{Binding HasChange}" />
             </DataGrid.Columns>
         </DataGrid>

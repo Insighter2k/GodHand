@@ -1,15 +1,42 @@
-﻿namespace GodHand.Shared.Models
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using GodHand.Shared.Annotations;
+
+namespace GodHand.Shared.Models
 {
-    public class ByteInformation
-    {
+    public class ByteInformation : INotifyPropertyChanged
+    {        
         public byte[] ByteValue { get; }
         public int ByteValueLength => ByteValue.Length;
         public int StartPosition { get; }
         public string CurrentValue { get; }
-        public string NewValue { get; set; }
+
+        private string _newValue;
+        public string NewValue
+        {
+            get => _newValue;
+            set
+            {
+                if (value.Length <= ByteValueLength)
+                {
+                    _newValue = value;
+                    OnPropertyChanged(nameof(NewValueLength));
+                }
+            }
+        }
         public int NewValueLength => NewValue.Length;
         public string RomajiTranslation { get; }
-        public bool HasChange { get; set; }
+
+        private bool _hasChange;
+        public bool HasChange
+        {
+            get => _hasChange;
+            set
+            {
+                _hasChange = value;
+                OnPropertyChanged(nameof(HasChange));
+            }
+        }
 
         public ByteInformation(byte[] byteValue, int startPosition, string currentValue)
         {
@@ -19,6 +46,14 @@
             NewValue = currentValue;
             RomajiTranslation = Kakasi.NET.Interop.KakasiLib.DoKakasi(currentValue);
             HasChange = false;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

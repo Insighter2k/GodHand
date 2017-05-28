@@ -44,6 +44,7 @@
     <Compile Include="IO\Write.cs" />
     <Compile Include="Models\ByteInformation.cs" />
     <Compile Include="IO\Read.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

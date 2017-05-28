@@ -2,6 +2,8 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Forms;
 using GodHand.Shared.IO;
 using GodHand.Shared.Models;
@@ -19,8 +21,7 @@ namespace GodHand.Client.ViewModels
 
         #region Properties
 
-        private bool _isOpening = false;
-
+        private bool _isOpening;
         private bool IsOpening
         {
             get => _isOpening;
@@ -91,7 +92,6 @@ namespace GodHand.Client.ViewModels
         }
 
         private ObservableCollection<ByteInformation> _collection = new ObservableCollection<ByteInformation>();
-
         public ObservableCollection<Shared.Models.ByteInformation> Collection
         {
             get => _collection;
@@ -101,6 +101,7 @@ namespace GodHand.Client.ViewModels
                 NotifyOfPropertyChange(() => Collection);
             }
         }
+        public ByteInformation SelectedCollection { get; set; }
 
         #endregion
 
@@ -148,6 +149,28 @@ namespace GodHand.Client.ViewModels
 
         #endregion
 
+        #region Events
+
+        public void Dg_CellEditEnding(DataGridCellEditEndingEventArgs e)
+        {
+            var element = e.EditingElement as System.Windows.Controls.TextBox;
+            e.Cancel = CellValueChanged(e.Column, element?.Text);
+        }
+
+        private bool CellValueChanged(DataGridColumn column, string value)
+        {
+            bool isCellValueValid = true;
+
+            if (column.Header.ToString() == "New Value")
+            {
+                isCellValueValid = value?.Length > SelectedCollection.ByteValueLength;
+                if (!value.Equals(SelectedCollection.CurrentValue)) SelectedCollection.HasChange = true;
+            }
+
+            return isCellValueValid;
+        }
+
+        #endregion
 
 
 
