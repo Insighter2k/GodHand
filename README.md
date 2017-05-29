@@ -3,7 +3,8 @@ A tool for translating the japanese language to romaji and english language. Thi
 
 ## What does the program offer to you?
 A tool for reading hiragana, katakana, kanjis and kana with inbuild romaji translation for (3ds game) files.
-It shall help you to locate the japanese words / sentences and offer you a a first inbuild translation to romaji. You don't have to rely on this feature, but it can help you, I guess. You can write down the new value and save it to the file directly.
+Additionally an english translator has been added for direct english translations.
+It shall help you to locate the japanese words / sentences and offer you a a first inbuild translation to romaji / english. You don't have to rely on this feature, but it can help you, I guess. You can write down the new value and save it to the file directly.
 
 ## How does it work?
 The usage is simple. You click "SelectFile" and select your desired file.
