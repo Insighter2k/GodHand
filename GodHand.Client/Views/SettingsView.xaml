@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:GodHand.Client.Views"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" ShowCloseButton="False" ShowMaxRestoreButton="False" ShowMinButton="False">
+             d:DesignHeight="320" d:DesignWidth="600" ShowCloseButton="False" ShowMaxRestoreButton="False" ShowMinButton="False" BorderThickness="1" BorderBrush="Black" ResizeMode="NoResize" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -19,34 +19,34 @@
         </Grid.RowDefinitions>
         <GroupBox Header="General" Margin="5">
             <StackPanel>
-                <CheckBox Content="Enable Length Limit" Margin="5"/>
-                <CheckBox Content="Enable Romaji Translation" Margin="5"/>
+                <CheckBox Content="Enable Romaji Translation" IsChecked="{Binding EnableRomajiTranslation}" Margin="5"/>
+                <CheckBox Content="Enable Google Translation" IsChecked="{Binding EnableGoogleTranslation}" Margin="5"/>
             </StackPanel>
         </GroupBox>
         
         <GroupBox Grid.Column="1" Header="Translation Options" Margin="5">
             <StackPanel>
-                <CheckBox Content="Enable Kanji to ASCII" Margin="5"/>
-                <CheckBox Content="Enable Hiragana to ASCII" Margin="5"/>
-                <CheckBox Content="Enable Katakana to ASCII" Margin="5"/>
-                <CheckBox Content="Enable Rest (Kigou) characters to ASCII" Margin="5"/>
-                <CheckBox Content="Enable JisRoman to ASCII" Margin="5"/>
-                <CheckBox Content="Enable Kana to ASCII" Margin="5"/>
-                <CheckBox Content="Enable Graphic characters to ASCII" Margin="5"/>
+                <CheckBox Content="Enable Kanji to ASCII" IsChecked="{Binding EnableKanjiToAscii}" Margin="5"/>
+                <CheckBox Content="Enable Hiragana to ASCII" IsChecked="{Binding EnableHiraganaToAscii}" Margin="5"/>
+                <CheckBox Content="Enable Katakana to ASCII" IsChecked="{Binding EnableKatakanaToAscii}" Margin="5"/>
+                <CheckBox Content="Enable Rest (Kigou) characters to ASCII" IsChecked="{Binding EnableKigouToAscii}" Margin="5"/>
+                <CheckBox Content="Enable JisRoman to ASCII" IsChecked="{Binding EnableJisRomanToAscii}" Margin="5"/>
+                <CheckBox Content="Enable Kana to ASCII" IsChecked="{Binding EnableKanaToAscii}" Margin="5"/>
+                <CheckBox Content="Enable Graphic characters to ASCII" IsChecked="{Binding EnableGraphicToAscii}" Margin="5"/>
             </StackPanel>
         </GroupBox>
 
         <GroupBox Grid.Column="2" Header="Romaji Options" Margin="5">
             <StackPanel>
-                <CheckBox Content="Insert a separate character between words" Margin="5"/>
-                <CheckBox Content="Capitalize Romaji words (Kanji to ASCII)" Margin="5"/>
-                <CheckBox Content="Upcase Romaji words (Kanji to ASCII)" Margin="5"/>
-                <CheckBox Content="Enable Wakitagaki (word segmention, no Romaji translation)" Margin="5"/>
-                <CheckBox Content="Romaji Conversion Hepburn (Checked) | Kunrei (Unchecked)" Margin="5"/>
+                <CheckBox Content="Insert a separate character between words" IsChecked="{Binding InsertSeparateCharacters}" Margin="5"/>
+                <CheckBox Content="Capitalize Romaji words (Kanji to ASCII)" IsChecked="{Binding CapitalizeRomaji}" Margin="5"/>
+                <CheckBox Content="Upcase Romaji words (Kanji to ASCII)" IsChecked="{Binding UpscaleRomaji}" Margin="5"/>
+                <CheckBox Content="Enable Wakitagaki (word segmention, no Romaji translation)" IsChecked="{Binding EnableWakitagaki}" Margin="5"/>
+                <CheckBox Content="Romaji Conversion Hepburn (Checked) | Kunrei (Unchecked)" IsChecked="{Binding EnableHepburn}" Margin="5"/>
             </StackPanel>
         </GroupBox>
 
-        <Button Grid.Row="1" Grid.ColumnSpan="3" Content="Close" Margin="5" />
+        <Button Name="BtnClose" Grid.Row="1" Grid.ColumnSpan="3" Content="Close" Margin="5" />
     </Grid>
 </controls:MetroWindow>
 

@@ -1,9 +1,8 @@
-﻿using System.Collections.ObjectModel;
-using System.Dynamic;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using Caliburn.Micro;
@@ -16,8 +15,8 @@ namespace GodHand.Client.ViewModels
 {
     public class MainViewModel : Screen
     {
-        WindowManager winMan = new WindowManager();
-
+        private WindowManager _winMan = new WindowManager();
+        
         public MainViewModel()
         {
             DisplayName = "GodHand - Japanese Game Translator - powered by Insight2k";
@@ -96,6 +95,7 @@ namespace GodHand.Client.ViewModels
         }
 
         private ObservableCollection<ByteInformation> _collection = new ObservableCollection<ByteInformation>();
+        
         public ObservableCollection<Shared.Models.ByteInformation> Collection
         {
             get => _collection;
@@ -105,7 +105,19 @@ namespace GodHand.Client.ViewModels
                 NotifyOfPropertyChange(() => Collection);
             }
         }
-        public ByteInformation SelectedCollection { get; set; }
+
+        private ByteInformation _selectedCollection;
+        public ByteInformation SelectedCollection
+        {
+            get => _selectedCollection;
+            set
+            {
+                _selectedCollection = value;
+                if (value.RomajiTranslation == null && Sources.Settings.EnableRomajiTranslation) value.RomajiTranslation = Shared.IO.Convert.ToRomaji(value.CurrentValue, Sources.Settings);
+                if (value.EnglishTranslation == null && Sources.Settings.EnableGoogleTranslation) value.EnglishTranslation = Shared.IO.Convert.ToEnglish(value.CurrentValue);
+                NotifyOfPropertyChange(() => SelectedCollection);               
+            }
+        }
 
         //private ObservableCollection<Screen> _flyouts = new ObservableCollection<Screen>();
         //public ObservableCollection<Screen> Flyouts
@@ -126,15 +138,8 @@ namespace GodHand.Client.ViewModels
         {
             //var flyout = Flyouts[0];
             //((IFlyout) flyout).IsOpen = !((IFlyout) flyout).IsOpen;
-            dynamic settings = new ExpandoObject();
-            settings.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            settings.ResizeMode = ResizeMode.NoResize;
-            settings.MinWidth = 450;
-            settings.MinHeight = 200;
-            
-            
-
-            winMan.ShowDialog(SettingsViewModel.Create(),null, settings);
+               
+            _winMan.ShowDialog(SettingsViewModel.Create());
         }
 
         public void BtnSelectFile()
@@ -184,6 +189,7 @@ namespace GodHand.Client.ViewModels
         public void View_Loaded()
         {
             //Flyouts.Add(SettingsViewModel.Create());
+            Sources.Settings = Shared.IO.Read.Xml<Shared.Models.Settings>(Environment.CurrentDirectory+@"\Settings.xml");
         }
 
         public void Dg_CellEditEnding(DataGridCellEditEndingEventArgs e)

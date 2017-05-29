@@ -74,9 +74,23 @@
                 <DataGridTextColumn Header="Length" Binding="{Binding ByteValueLength, Mode=OneWay}" />
                 <DataGridTextColumn Header="New Value" Binding="{Binding NewValue, ValidatesOnExceptions=True}" />
                 <DataGridTextColumn Header="New Length" Binding="{Binding NewValueLength, Mode=OneWay}" />
-                <DataGridTextColumn Header="Romaji Translation" Binding="{Binding RomajiTranslation, Mode=OneWay}" />
                 <DataGridCheckBoxColumn Header="Changes?" Binding="{Binding HasChange}" />
             </DataGrid.Columns>
+            
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <DockPanel Background="CadetBlue">
+                        <StackPanel DockPanel.Dock="Left" Margin="5">
+                            <TextBlock Text="Romaji Translation" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding RomajiTranslation}" />
+                        </StackPanel>
+                        <StackPanel DockPanel.Dock="Left" Margin="5">
+                            <TextBlock Text="Google English Translation" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding EnglishTranslation}" />
+                        </StackPanel>
+                    </DockPanel>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
         </DataGrid>
     </Grid>
 

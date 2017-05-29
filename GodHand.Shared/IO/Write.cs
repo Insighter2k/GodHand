@@ -1,5 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.IO;
+using System.Text;
+using System.Xml.Serialization;
 using GodHand.Shared.Models;
 
 namespace GodHand.Shared.IO
@@ -26,6 +28,15 @@ namespace GodHand.Shared.IO
                 }
 
 
+            }
+        }
+
+        public static void Xml<T>(T item, string path)
+        {
+            using (var sw = new StreamWriter(path, false, Encoding.ASCII))
+            {
+                XmlSerializer xml = new XmlSerializer(typeof(T));
+                xml.Serialize(sw,item);
             }
         }
     }

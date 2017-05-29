@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<Settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <EnableRomajiTranslation>false</EnableRomajiTranslation>
+  <EnableGoogleTranslation>false</EnableGoogleTranslation>
+  <EnableKanjiToAscii>false</EnableKanjiToAscii>
+  <EnableHiraganaToAscii>false</EnableHiraganaToAscii>
+  <EnableKatakanaToAscii>false</EnableKatakanaToAscii>
+  <EnableKigouToAscii>false</EnableKigouToAscii>
+  <EnableJisRomanToAscii>false</EnableJisRomanToAscii>
+  <EnableKanaToAscii>false</EnableKanaToAscii>
+  <EnableGraphicToAscii>false</EnableGraphicToAscii>
+  <InsertSeparateCharacters>false</InsertSeparateCharacters>
+  <CapitalizeRomaji>false</CapitalizeRomaji>
+  <UpscaleRomaji>false</UpscaleRomaji>
+  <EnableWakitagaki>false</EnableWakitagaki>
+  <EnableHepburn>false</EnableHepburn>
+</Settings>

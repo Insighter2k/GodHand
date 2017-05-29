@@ -3,6 +3,8 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Xml;
+using System.Xml.Serialization;
 using GodHand.Shared.Models;
 
 namespace GodHand.Shared.IO
@@ -11,10 +13,7 @@ namespace GodHand.Shared.IO
     {
 
         public static ObservableCollection<ByteInformation> File(string path, long start, long length)
-        {
-            Kakasi.NET.Interop.KakasiLib.Init();
-            Kakasi.NET.Interop.KakasiLib.SetParams(new[] {"kakasi", "-U", "-Ka", "-Ha", "-Ja", "-Ea", "-ka", "-s", "-C"});
-
+        {            
             Encoding utf8Encoding = Encoding.UTF8;
             using (Stream fStr = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
@@ -56,6 +55,22 @@ namespace GodHand.Shared.IO
                 }
                 return lByteInformation;
             }
+        }
+
+        public static T Xml<T>(string path) where T: new()
+        {
+            var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.None );
+            var returnItem = new T();
+
+            XmlSerializer xml = null;
+
+            using (var rd = new XmlTextReader(fs))
+            {
+                xml = new XmlSerializer(typeof(T));
+                returnItem = (T)xml.Deserialize(rd);
+            }
+
+            return returnItem;
         }
     }
 }

@@ -25,7 +25,9 @@ namespace GodHand.Shared.Models
             }
         }
         public int NewValueLength => NewValue.Length;
-        public string RomajiTranslation { get; }
+        public string RomajiTranslation { get; set; }
+
+        public string EnglishTranslation { get; set; }
 
         private bool _hasChange;
         public bool HasChange
@@ -44,7 +46,6 @@ namespace GodHand.Shared.Models
             StartPosition = startPosition;
             CurrentValue = currentValue;
             NewValue = currentValue;
-            RomajiTranslation = Kakasi.NET.Interop.KakasiLib.DoKakasi(currentValue);
             HasChange = false;
         }
 
