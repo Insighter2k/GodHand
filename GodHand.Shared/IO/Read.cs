@@ -78,6 +78,7 @@ namespace GodHand.Shared.IO
         public static string Picture()
         {
             string c2tPath = (Environment.Is64BitProcess) ? @"\lib\Capture2Text\x64\Capture2Text_CLI.exe" : @"\lib\Capture2Text\x86\Capture2Text_CLI.exe";
+            string ocrPath= Environment.CurrentDirectory + @"\temp\ocr.txt";
             string result = string.Empty;
 
             try
@@ -86,17 +87,16 @@ namespace GodHand.Shared.IO
                 ProcessStartInfo processStartInfo = new ProcessStartInfo();
                 processStartInfo.CreateNoWindow = true;
                 processStartInfo.UseShellExecute = false;
-                processStartInfo.RedirectStandardOutput = true;
-                processStartInfo.RedirectStandardInput = true;
 
                 processStartInfo.FileName = Environment.CurrentDirectory + c2tPath;
                 processStartInfo.Arguments =
-                    $@" -l ""Japanese"" -i ""{Environment.CurrentDirectory + @"\temp\temp.jpg"}""";              
+                    $@" -l ""Japanese"" -i ""{Environment.CurrentDirectory + @"\temp\temp.jpg"}"" -o ""{ocrPath}""";              
                 proc.StartInfo = processStartInfo;
                 proc.Start();
                 proc.WaitForExit();
 
-                result = proc.StandardOutput.ReadToEnd();
+                result = System.IO.File.ReadAllText(ocrPath, Encoding.UTF8);
+
             }
 
             catch (Exception e)
