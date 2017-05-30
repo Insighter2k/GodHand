@@ -44,4 +44,5 @@ You need Windows with .NET Framework 4.5.2. Then you are set to go.
 
 ## Links
 Kasaki Wrapper -> https://github.com/linguanostra/Kakasi.NET
+
 Capture2Text -> http://capture2text.sourceforge.net/
