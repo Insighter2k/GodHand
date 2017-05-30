@@ -1,0 +1,43 @@
+﻿<controls:MetroContentControl x:Class="GodHand.Client.Views.OcrView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GodHand.Client.Views"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:cal="http://www.caliburnproject.org"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" cal:Message.Attach="[Event Loaded]=[Action View_Loaded($source)]">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Button Name="BtnLoadImage" Grid.Row="0" Grid.ColumnSpan="4" Content="Load Image" Margin="5" />
+        
+        <Label Grid.Row="1" Grid.Column="0" Content="Input" Margin="5" VerticalContentAlignment="Center"/>
+        <TextBox Text="{Binding TbxInput}" Grid.Row="1" Grid.Column="1" Margin="5" />
+        <Label Grid.Row="1" Grid.Column="2" Content="Output" Margin="5" VerticalContentAlignment="Center"/>
+        <TextBox Text="{Binding TbxOutput}" Grid.Row="1" Grid.Column="3" Margin="5" />
+
+        <Grid Name="ImageGrid" Grid.Row="2" Grid.ColumnSpan="4">
+            <Canvas Name="Canvas" MaxHeight="{Binding ElementName=ImageGrid, Path=ActualHeight}" MaxWidth="{Binding ElementName=ImageGrid, Path=ActualWidth}" Height="{Binding ElementName=Image, Path=ImageSource.Height}"
+                    Width="{Binding ElementName=Image, Path=ImageSource.Width}"
+                    cal:Message.Attach="[Event MouseDown] = [Action Canvas_MouseDown($eventArgs)];
+                [Event MouseMove] = [Action Canvas_MouseMove($eventArgs)];
+                [Event MouseUp] = [Action Canvas_MouseUp($eventArgs)]">
+                <Canvas.Background>
+                    <ImageBrush x:Name="Image" ImageSource="{Binding Image}" Stretch="Fill" />
+                </Canvas.Background>
+            </Canvas>
+        </Grid>
+    </Grid>
+</controls:MetroContentControl>
+

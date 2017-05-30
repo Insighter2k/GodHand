@@ -119,7 +119,7 @@ namespace Kakasi.NET.Interop
 
             // Lib path
             var kakasiLibPath = Path.Combine(executionPath,
-                Environment.Is64BitProcess ? @"x64\" : @"x86\");
+                Environment.Is64BitProcess ? @"lib\Kakasi\x64\" : @"lib\Kakasi\x86\");
 
             // Set search path
             SetDllDirectory(kakasiLibPath);

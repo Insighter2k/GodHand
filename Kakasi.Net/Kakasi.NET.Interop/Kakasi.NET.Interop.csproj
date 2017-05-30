@@ -50,16 +50,16 @@
     <Content Include="kanwadict">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="x64\libiconv-2.dll">
+    <Content Include="lib\Kakasi\x64\libiconv-2.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="x64\libkakasi.dll">
+    <Content Include="lib\Kakasi\x64\libkakasi.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="x86\libiconv-2.dll">
+    <Content Include="lib\Kakasi\x86\libiconv-2.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="x86\libkakasi.dll">
+    <Content Include="lib\Kakasi\x86\libkakasi.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

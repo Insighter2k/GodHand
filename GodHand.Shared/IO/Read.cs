@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows;
 using System.Xml;
 using System.Xml.Serialization;
 using GodHand.Shared.Models;
@@ -11,7 +14,6 @@ namespace GodHand.Shared.IO
 {
     public class Read
     {
-
         public static ObservableCollection<ByteInformation> File(string path, long start, long length)
         {            
             Encoding utf8Encoding = Encoding.UTF8;
@@ -71,6 +73,38 @@ namespace GodHand.Shared.IO
             }
 
             return returnItem;
+        }
+
+        public static string Picture()
+        {
+            string c2tPath = (Environment.Is64BitProcess) ? @"\lib\Capture2Text\x64\Capture2Text_CLI.exe" : @"\lib\Capture2Text\x86\Capture2Text_CLI.exe";
+            string result = string.Empty;
+
+            try
+            {
+                Process proc = new Process();
+                ProcessStartInfo processStartInfo = new ProcessStartInfo();
+                processStartInfo.CreateNoWindow = true;
+                processStartInfo.UseShellExecute = false;
+                processStartInfo.RedirectStandardOutput = true;
+                processStartInfo.RedirectStandardInput = true;
+
+                processStartInfo.FileName = Environment.CurrentDirectory + c2tPath;
+                processStartInfo.Arguments =
+                    $@" -l ""Japanese"" -i ""{Environment.CurrentDirectory + @"\temp\temp.jpg"}""";              
+                proc.StartInfo = processStartInfo;
+                proc.Start();
+                proc.WaitForExit();
+
+                result = proc.StandardOutput.ReadToEnd();
+            }
+
+            catch (Exception e)
+            {
+                MessageBox.Show("There has been an error while reading picture: " + e);
+            }
+
+            return result;
         }
     }
 }
