@@ -7,6 +7,7 @@ Additionally an english translator has been added for direct english translation
 It shall help you to locate the japanese words / sentences and offer you a a first inbuild translation to romaji / english. You don't have to rely on this feature, but it can help you, I guess. You can write down the new value and save it to the file directly.
 
 ## How does it work?
+### Tab File
 The usage is simple. You click "SelectFile" and select your desired file.
 When a file has been selected, you click "Open File" and the tool loads all words / sentences it can find to the result table. Additionally, you can set up the starting offset in "Start Offset" and the length of the offset, "Offset Length". For really big files, this option does make senses. Otherwise stick to "-1", which tells the tool to read the whole file.
 If the tool find just one japanese char, it will be added to the result table. In that case, some entries might look akward. You should ignore those.
@@ -22,16 +23,25 @@ If you click on a row, a *detailed row* will be shown with the following content
 - Romaji Translation: Depending on the content of "Current Value", it tries to translate it to romaji. I am not sure about whole sentences. Translation is started when selected row changes.
 - Google English Translation: It tries to translate it to english via the google api. Translation is started when selected row changes.
 
+### Tab OCR
+This is quite straight forwarded. You click on "Load Image" and select your japanese image file you want to translate.
+If the image has been loaded, you can create a rectangle with your mouse (button down) on that image. If you have marked your text, let your mouse button go and wait a few seconds to load the Capture2Text result in the "Input" textbox. It will automaticall try to translate via google api into english. You might need to redo the steps for a good result.
+
 ## Settings
 You can change some settings for the tool like enabling translation (romaji, english) at all or how you would like to have your romaji translation.
 
 ## Pre-Requisites
 You need Windows with .NET Framework 4.5.2. Then you are set to go.
 
+
 ## Possible Tasks
 - [ ] Custom encoding-tables
-- [ ] OCR-support?
+- [x] OCR-support?
 - [ ] Adding other translations APIs
 
 ## Thanks
 @linguanostra for providing the .NET wrapper for the KAKASI tool which is doing the romaji translation for you :+1:
+
+## Links
+Kasaki Wrapper -> https://github.com/linguanostra/Kakasi.NET
+Capture2Text -> http://capture2text.sourceforge.net/
