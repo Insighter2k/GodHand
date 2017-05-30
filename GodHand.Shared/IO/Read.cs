@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Documents;
 using System.Xml;
 using System.Xml.Serialization;
 using GodHand.Shared.Models;
@@ -14,11 +16,12 @@ namespace GodHand.Shared.IO
 {
     public class Read
     {
-        public static ObservableCollection<ByteInformation> File(string path, long start, long length)
+        public static ObservableCollection<ByteInformation> File(string path, long start, long length, string encoder)
         {            
             Encoding utf8Encoding = Encoding.UTF8;
             using (Stream fStr = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
+                Dictionary<string, string> dict = (encoder == "Default") ? null : Read.EncodingTable(encoder);
                 BinaryReader bReader = new BinaryReader(fStr);
                 ObservableCollection<ByteInformation> lByteInformation = new ObservableCollection<ByteInformation>();
 
@@ -33,11 +36,14 @@ namespace GodHand.Shared.IO
                 for (int j = 0; j < bytes.Length; j++)
                 {
                     if (bytes[j] == 0 && tempByteList.Count == 0) continue;
-                    else if (int.TryParse(bytes[j].ToString(), out i) == false) continue;
-                    else if (bytes[j] == 0 && tempByteList.Count > 0)
+                    if (int.TryParse(bytes[j].ToString(), out i) == false) continue;
+                    if (bytes[j] == 0 && tempByteList.Count > 0)
                     {
+                        var currentValue = (encoder == "Default")
+                            ? Encoding.GetEncoding(932).GetString(tempByteList.ToArray())
+                            : Convert.ByteValueToCustomEncoding(tempByteList.ToArray(), dict);
                         ByteInformation bi = new ByteInformation(tempByteList.ToArray(), j - tempByteList.Count,
-                            Encoding.GetEncoding(932).GetString(tempByteList.ToArray()));
+                            currentValue);
                         lByteInformation.Add(bi);
                         tempByteList.Clear();
                     }
@@ -105,6 +111,27 @@ namespace GodHand.Shared.IO
             }
 
             return result;
+        }
+
+        public static Dictionary<string, string> EncodingTable(string filename)
+        {
+            string directory = Environment.CurrentDirectory + @"\encoding\";
+            string path = directory + filename;
+
+            Dictionary<string,string> encodingTable = new Dictionary<string, string>();
+
+            var lines = System.IO.File.ReadAllLines(path);
+
+            foreach (var line in lines)
+            {
+                if (string.IsNullOrEmpty(line)) continue;
+                if (line.StartsWith("#")) continue;
+
+                var lineArray = line.Split(';');
+                encodingTable.Add(lineArray[0], lineArray[1]);
+            }
+
+            return encodingTable;
         }
     }
 }

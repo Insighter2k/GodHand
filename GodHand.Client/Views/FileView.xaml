@@ -4,11 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-        xmlns:client="clr-namespace:GodHand.Client"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:cal="http://www.caliburnproject.org"
-        xmlns:viewModel="clr-namespace:GodHand.Client.ViewModels"
-        xmlns:views="clr-namespace:GodHand.Client.Views"
         mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -34,11 +30,10 @@
         <Button Grid.Column="7" Grid.ColumnSpan="3" Name="BtnSaveFile" Content="Save File" Margin="5"/>
 
         <Label Grid.Column="0" Grid.Row="1" Content="Selected File:" FontWeight="Bold" VerticalContentAlignment="Center"/>
-        <Label Grid.Column="1" Grid.Row="1" Name="LblSelectedFile" VerticalContentAlignment="Center"/>
-        <Label Grid.Column="2" Grid.Row="1" Content="Filesize:" FontWeight="Bold" VerticalContentAlignment="Center"/>
-        <Label Grid.Column="3" Grid.Row="1" Name="LblFilesize" VerticalContentAlignment="Center" />
-        <Label Grid.Column="4" Grid.Row="1" Content="Last change:" FontWeight="Bold" VerticalContentAlignment="Center"/>
-        <Label Grid.Column="5" Grid.Row="1" Name="LblLastChange" VerticalContentAlignment="Center"/>
+        <Label Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Name="LblSelectedFile" VerticalContentAlignment="Center"/>
+        <Label Grid.Column="4" Grid.Row="1" Content="Encoding Table" FontWeight="Bold" VerticalContentAlignment="Center"/>
+        <ComboBox Grid.Column="5" Grid.Row="1" Name="CmbEncoderTable" SelectedItem="{Binding SelectedCmbEncoderTable}" 
+                  cal:Message.Attach="[Event DropDownOpened] = [Action Cmb_DropDownOpened()]" Margin="5"/>
         <Label Grid.Column="6" Grid.Row="1" Content="Start Offset:" FontWeight="Bold" VerticalContentAlignment="Center"/>
         <TextBox Grid.Column="7" Grid.Row="1" Name="TbxStartOffset" Margin="5" />
         <Label Grid.Column="8" Grid.Row="1" Content="Offset Length:" FontWeight="Bold" VerticalContentAlignment="Center"/>

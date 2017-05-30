@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
@@ -68,16 +69,8 @@ namespace GodHand.Client.ViewModels
             }
         }
 
-        private string _lblLastChange;
-        public string LblLastChange
-        {
-            get => _lblLastChange;
-            set
-            {
-                _lblLastChange = value;
-                NotifyOfPropertyChange(() => LblLastChange);
-            }
-        }
+        public List<string> CmbEncoderTable { get; } = new List<string>() {"Default"};
+        public string SelectedCmbEncoderTable { get; set; } = "Default";
 
         private long _tbxStartOffset = -1;
         public long TbxStartOffset
@@ -120,8 +113,13 @@ namespace GodHand.Client.ViewModels
             set
             {
                 _selectedCollection = value;
-                if (value.RomajiTranslation == null && Sources.Settings.EnableRomajiTranslation) value.RomajiTranslation = Shared.IO.Convert.ToRomaji(value.CurrentValue, Sources.Settings);
-                if (value.EnglishTranslation == null && Sources.Settings.EnableGoogleTranslation) value.EnglishTranslation = Shared.IO.Convert.ToEnglish(value.CurrentValue);
+                if (value != null)
+                {
+                    if (value?.RomajiTranslation == null && Sources.Settings.EnableRomajiTranslation)
+                        value.RomajiTranslation = Shared.IO.Convert.ToRomaji(value.CurrentValue, Sources.Settings);
+                    if (value?.EnglishTranslation == null && Sources.Settings.EnableGoogleTranslation)
+                        value.EnglishTranslation = Shared.IO.Convert.ToEnglish(value.CurrentValue);
+                }
                 NotifyOfPropertyChange(() => SelectedCollection);               
             }
         }
@@ -141,7 +139,6 @@ namespace GodHand.Client.ViewModels
                 FileInfo fi = new FileInfo(openFileDialog.FileName);
                 LblSelectedFile = fi.FullName;
                 LblFilesize = $"{(fi.Length / 1000)} KB";
-                LblLastChange = fi.LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss");
             }
         }
 
@@ -150,9 +147,10 @@ namespace GodHand.Client.ViewModels
         public async void BtnOpenFile()
         {
             IsOpening = true;
+            Collection.Clear();
             await Task.Factory.StartNew(() =>
             {
-                Collection = Read.File(LblSelectedFile, TbxStartOffset, TbxOffsetLength);
+                Collection = Read.File(LblSelectedFile, TbxStartOffset, TbxOffsetLength, SelectedCmbEncoderTable);
             });
             IsOpening = false;
         }
@@ -191,6 +189,15 @@ namespace GodHand.Client.ViewModels
             }
 
             return isCellValueValid;
+        }
+
+        public void Cmb_DropDownOpened()
+        {
+            CmbEncoderTable.RemoveRange(1, CmbEncoderTable.Count-1);
+            var files = Directory.GetFiles(Environment.CurrentDirectory + @"\encoding\", "*.txt",
+                SearchOption.TopDirectoryOnly);
+
+            CmbEncoderTable.AddRange(files.Select(x=> x.Split('\\')[x.Split('\\').Length-1]));
         }
 
         #endregion

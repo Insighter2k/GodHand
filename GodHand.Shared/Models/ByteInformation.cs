@@ -24,7 +24,15 @@ namespace GodHand.Shared.Models
                 }
             }
         }
-        public int NewValueLength => NewValue.Length;
+        public int NewValueLength
+        {
+            get
+            {
+                if (NewValue != null) return NewValue.Length;
+                return -1;
+            }
+        }
+
         public string RomajiTranslation { get; set; }
 
         public string EnglishTranslation { get; set; }
