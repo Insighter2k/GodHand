@@ -1,0 +1,11 @@
+C:\Users\Insight\Documents\Visual Studio 2017\Projects\GodHand\Kakasi.Net\Kakasi.NET.Interop\bin\Debug\itaijidict
+C:\Users\Insight\Documents\Visual Studio 2017\Projects\GodHand\Kakasi.Net\Kakasi.NET.Interop\bin\Debug\kanwadict
+C:\Users\Insight\Documents\Visual Studio 2017\Projects\GodHand\Kakasi.Net\Kakasi.NET.Interop\bin\Debug\lib\Kakasi\x64\libiconv-2.dll
+C:\Users\Insight\Documents\Visual Studio 2017\Projects\GodHand\Kakasi.Net\Kakasi.NET.Interop\bin\Debug\lib\Kakasi\x64\libkakasi.dll
+C:\Users\Insight\Documents\Visual Studio 2017\Projects\GodHand\Kakasi.Net\Kakasi.NET.Interop\bin\Debug\lib\Kakasi\x86\libiconv-2.dll
+C:\Users\Insight\Documents\Visual Studio 2017\Projects\GodHand\Kakasi.Net\Kakasi.NET.Interop\bin\Debug\lib\Kakasi\x86\libkakasi.dll
+C:\Users\Insight\Documents\Visual Studio 2017\Projects\GodHand\Kakasi.Net\Kakasi.NET.Interop\bin\Debug\Kakasi.NET.Interop.dll
+C:\Users\Insight\Documents\Visual Studio 2017\Projects\GodHand\Kakasi.Net\Kakasi.NET.Interop\bin\Debug\Kakasi.NET.Interop.pdb
+C:\Users\Insight\Documents\Visual Studio 2017\Projects\GodHand\Kakasi.Net\Kakasi.NET.Interop\obj\Debug\Kakasi.NET.Interop.csprojResolveAssemblyReference.cache
+C:\Users\Insight\Documents\Visual Studio 2017\Projects\GodHand\Kakasi.Net\Kakasi.NET.Interop\obj\Debug\Kakasi.NET.Interop.dll
+C:\Users\Insight\Documents\Visual Studio 2017\Projects\GodHand\Kakasi.Net\Kakasi.NET.Interop\obj\Debug\Kakasi.NET.Interop.pdb

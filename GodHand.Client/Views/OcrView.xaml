@@ -28,7 +28,8 @@
         <TextBox Text="{Binding TbxOutput}" Grid.Row="1" Grid.Column="3" Margin="5" />
 
         <Grid Name="ImageGrid" Grid.Row="2" Grid.ColumnSpan="4">
-            <Canvas Name="Canvas" MaxHeight="{Binding ElementName=ImageGrid, Path=ActualHeight}" MaxWidth="{Binding ElementName=ImageGrid, Path=ActualWidth}" Height="{Binding ElementName=Image, Path=ImageSource.Height}"
+            <ScrollViewer>
+            <Canvas Name="Canvas" Height="{Binding ElementName=Image, Path=ImageSource.Height}"
                     Width="{Binding ElementName=Image, Path=ImageSource.Width}"
                     cal:Message.Attach="[Event MouseDown] = [Action Canvas_MouseDown($eventArgs)];
                 [Event MouseMove] = [Action Canvas_MouseMove($eventArgs)];
@@ -37,6 +38,7 @@
                     <ImageBrush x:Name="Image" ImageSource="{Binding Image}" Stretch="Fill" />
                 </Canvas.Background>
             </Canvas>
+            </ScrollViewer>
         </Grid>
     </Grid>
 </controls:MetroContentControl>
