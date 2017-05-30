@@ -103,46 +103,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="lib\Capture2Text\x64\tessdata\deu.traineddata">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="lib\Capture2Text\x64\tessdata\eng.traineddata">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="lib\Capture2Text\x64\tessdata\fra.traineddata">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="lib\Capture2Text\x64\tessdata\jpn.traineddata">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="lib\Capture2Text\x64\tessdata\kor.traineddata">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="lib\Capture2Text\x64\tessdata\rus.traineddata">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="lib\Capture2Text\x64\tessdata\spa.traineddata">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="lib\Capture2Text\x86\tessdata\deu.traineddata">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="lib\Capture2Text\x86\tessdata\eng.traineddata">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="lib\Capture2Text\x86\tessdata\fra.traineddata">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="lib\Capture2Text\x86\tessdata\jpn.traineddata">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="lib\Capture2Text\x86\tessdata\kor.traineddata">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="lib\Capture2Text\x86\tessdata\rus.traineddata">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="lib\Capture2Text\x86\tessdata\spa.traineddata">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
