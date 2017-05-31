@@ -17,7 +17,7 @@ namespace GodHand.Shared.IO
     public class Read
     {
         public static ObservableCollection<ByteInformation> File(string path, long start, long length, string encoder)
-        {            
+        {
             Encoding utf8Encoding = Encoding.UTF8;
             using (Stream fStr = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
@@ -27,7 +27,7 @@ namespace GodHand.Shared.IO
 
                 byte[] bytes;
 
-                if (start != -1) bReader.BaseStream.Seek(start,SeekOrigin.Begin);
+                if (start != -1) bReader.BaseStream.Seek(start, SeekOrigin.Begin);
                 if (length == -1) bytes = bReader.ReadBytes(System.Convert.ToInt32(bReader.BaseStream.Length));
                 else bytes = bReader.ReadBytes(System.Convert.ToInt32(length));
 
@@ -65,9 +65,9 @@ namespace GodHand.Shared.IO
             }
         }
 
-        public static T Xml<T>(string path) where T: new()
+        public static T Xml<T>(string path) where T : new()
         {
-            var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.None );
+            var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.None);
             var returnItem = new T();
 
             XmlSerializer xml = null;
@@ -75,7 +75,7 @@ namespace GodHand.Shared.IO
             using (var rd = new XmlTextReader(fs))
             {
                 xml = new XmlSerializer(typeof(T));
-                returnItem = (T)xml.Deserialize(rd);
+                returnItem = (T) xml.Deserialize(rd);
             }
 
             return returnItem;
@@ -83,8 +83,10 @@ namespace GodHand.Shared.IO
 
         public static string Picture()
         {
-            string c2tPath = (Environment.Is64BitProcess) ? @"\lib\Capture2Text\x64\Capture2Text_CLI.exe" : @"\lib\Capture2Text\x86\Capture2Text_CLI.exe";
-            string ocrPath= Environment.CurrentDirectory + @"\temp\ocr.txt";
+            string c2tPath = (Environment.Is64BitProcess)
+                ? @"\lib\Capture2Text\x64\Capture2Text_CLI.exe"
+                : @"\lib\Capture2Text\x86\Capture2Text_CLI.exe";
+            string ocrPath = Environment.CurrentDirectory + @"\temp\ocr.txt";
             string result = string.Empty;
 
             try
@@ -96,7 +98,7 @@ namespace GodHand.Shared.IO
 
                 processStartInfo.FileName = Environment.CurrentDirectory + c2tPath;
                 processStartInfo.Arguments =
-                    $@" -l ""Japanese"" -i ""{Environment.CurrentDirectory + @"\temp\temp.jpg"}"" -o ""{ocrPath}""";              
+                    $@" -l ""Japanese"" -i ""{Environment.CurrentDirectory + @"\temp\temp.jpg"}"" -o ""{ocrPath}""";
                 proc.StartInfo = processStartInfo;
                 proc.Start();
                 proc.WaitForExit();
@@ -118,7 +120,7 @@ namespace GodHand.Shared.IO
             string directory = Environment.CurrentDirectory + @"\encoding\";
             string path = directory + filename;
 
-            Dictionary<string,string> encodingTable = new Dictionary<string, string>();
+            Dictionary<string, string> encodingTable = new Dictionary<string, string>();
 
             var lines = System.IO.File.ReadAllLines(path);
 
@@ -133,5 +135,43 @@ namespace GodHand.Shared.IO
 
             return encodingTable;
         }
+
+        public static List<TreeViewItem> DirectoriesOfPath(string path)
+        {
+            var items = new List<TreeViewItem>();
+
+            var dirInfo = new DirectoryInfo(path);
+
+            foreach (var directory in dirInfo.GetDirectories())
+            {
+                var item = new DirectoryItem
+                {
+                    Name = directory.Name,
+                    Fullpath = directory.FullName,
+                    Items = DirectoriesOfPath(directory.FullName)
+                };
+
+                items.Add(item);
+            }
+
+            return items;
+        }
+
+        public static List<TreeViewItem> FilesOfDirectory(string path)
+        {
+            var items = new List<TreeViewItem>();
+
+            var files = Directory.EnumerateFiles(path, "*", SearchOption.TopDirectoryOnly);
+
+            foreach (var file in files)
+            {
+                FileInfo fi = new FileInfo(file);
+                FileItem fItem = new FileItem() {Name = fi.Name, Fullpath = fi.FullName};
+                items.Add(fItem);
+            }
+
+            return items;
+        }
     }
+
 }

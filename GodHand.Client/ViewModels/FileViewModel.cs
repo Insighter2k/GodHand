@@ -25,7 +25,6 @@ namespace GodHand.Client.ViewModels
         #region Interface
 
         public string Header { get; set; }
-
         public bool IsSelected { get; set; }
         public Screen Content => this;
 

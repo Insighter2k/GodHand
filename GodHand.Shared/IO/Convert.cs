@@ -130,7 +130,8 @@ namespace GodHand.Shared.IO
                 {
                     entry = Helper(dict);
                 }
-
+                if (entry == "\\n") entry = entry.Replace("\\n", Environment.NewLine);
+                if (entry == "\\e") entry = entry.Replace("\\e", ((Char) 3).ToString());
                 result = result + entry;
             }
 

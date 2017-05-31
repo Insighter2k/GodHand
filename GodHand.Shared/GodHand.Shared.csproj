@@ -46,7 +46,11 @@
     <Compile Include="IO\Write.cs" />
     <Compile Include="Models\ByteInformation.cs" />
     <Compile Include="IO\Read.cs" />
+    <Compile Include="Models\DirectoryItem.cs" />
+    <Compile Include="Models\FileItem.cs" />
+    <Compile Include="Models\ProjectSettings.cs" />
     <Compile Include="Models\Settings.cs" />
+    <Compile Include="Models\TreeViewItem.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -3,17 +3,23 @@ using Caliburn.Micro;
 
 namespace GodHand.Client.ViewModels
 {
-    public class SettingsViewModel : Screen
+    public class SettingsViewModel : Screen, ITabItem
     {
-        private WindowManager _winMan;
-        protected SettingsViewModel()
-        {
-            DisplayName = "Settings";
-            //Header = DisplayName;
-            //Position = Position.Right;
+        protected SettingsViewModel(string header, bool isSelected)
+        { 
+            Header = header;
+            IsSelected = isSelected;
         }
 
-        public static Screen Create() => new SettingsViewModel();
+        public static Screen Create(string header, bool isSelected) => new SettingsViewModel(header, isSelected);
+
+        #region Interface
+
+        public string Header { get; set; }
+        public bool IsSelected { get; set; }
+        public Screen Content => this;
+
+        #endregion
 
         #region Flyout
         //private string _header;
@@ -150,12 +156,11 @@ namespace GodHand.Client.ViewModels
             set => Sources.Settings.EnableHepburn = value;
         }
 
-        public void BtnClose()
+        public override void TryClose(bool? dialogResult = null)
         {
             Shared.IO.Write.Xml(Sources.Settings, Environment.CurrentDirectory + @"\Settings.xml");
-            this.TryClose();
+
+            base.TryClose(dialogResult);
         }
-
-
     }
 }
