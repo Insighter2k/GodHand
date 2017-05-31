@@ -6,6 +6,8 @@ A tool for reading hiragana, katakana, kanjis and kana with inbuild romaji trans
 Additionally an english translator has been added for direct english translations.
 It shall help you to locate the japanese words / sentences and offer you a a first inbuild translation to romaji / english. You don't have to rely on this feature, but it can help you, I guess. You can write down the new value and save it to the file directly.
 
+You also can now create projects for your work. In your project, the functionality is not that much different like working with a single file. More in a few sentences.
+
 ## How does it work?
 ### Tab File
 The usage is simple. You click "SelectFile" and select your desired file.
@@ -41,6 +43,21 @@ If the image has been loaded, you can create a rectangle with your mouse (button
 ## Settings
 You can change some settings for the tool like enabling translation (romaji, english) at all or how you would like to have your romaji translation.
 
+## Projects
+### Project Management
+Project management allows you to create project spaces for your work. You can add, edit or delete projects.
+
+- Add => Creates a project with a certain name and a root path to your files you want to edit
+- Edit => Choose an existing project and change its name or rootpath
+- Delete => Deletes a project
+
+If you create a project, a folder will be created in the subfolder "projects".
+
+This feature is the first step to maintain translations and future releases with patches for the community.
+
+### Project Workspace
+If you have created your project, you can select it from the titlebar and if you click on it, a tabitem will be added with the project name. In this workspace, you will have on the left side a navigator into your given rootpath, for the underlying folder and file structures.On the right side is the result table where you can act like in the Tab "File".
+
 ## Pre-Requisites
 You need Windows with .NET Framework 4.5.2. Then you are set to go.
 
@@ -49,7 +66,7 @@ You need Windows with .NET Framework 4.5.2. Then you are set to go.
 - [x] Custom encoding-tables (Alpha Version)
 - [x] OCR-support?
 - [ ] Adding other translations APIs
-- [ ] Creating a project folder structure
+- [x] Creating a project folder structure
 - [ ] Adding a release patch management functionality
 
 ## Thanks
