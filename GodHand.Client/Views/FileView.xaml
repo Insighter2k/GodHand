@@ -39,15 +39,22 @@
         <Label Grid.Column="8" Grid.Row="1" Content="Offset Length:" FontWeight="Bold" VerticalContentAlignment="Center"/>
         <TextBox Grid.Column="9" Grid.Row="1" Name="TbxOffsetLength" Margin="5" />
 
-        <DataGrid Name="Collection" SelectedItem="{Binding SelectedCollection}" Grid.Row="2" Grid.ColumnSpan="10" Margin="5" AutoGenerateColumns="False" SelectionMode="Single"
+        <DataGrid Name="Collection" SelectedItem="{Binding SelectedCollection}" Grid.Row="2" Grid.ColumnSpan="10" Margin="5" 
+                  AutoGenerateColumns="False" SelectionMode="Single"
                  cal:Message.Attach="
                   [Event CellEditEnding] = [Action Dg_CellEditEnding($eventArgs)]">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Current Value" Binding="{Binding CurrentValue, Mode=OneWay}" />
                 <DataGridTextColumn Header="Length" Binding="{Binding ByteValueLength, Mode=OneWay}" />
-                <DataGridTextColumn Header="New Value" Binding="{Binding NewValue, ValidatesOnExceptions=True}" />
+                <DataGridTextColumn Header="New Value" Binding="{Binding NewValue}" />
                 <DataGridTextColumn Header="New Length" Binding="{Binding NewValueLength, Mode=OneWay}" />
-                <DataGridCheckBoxColumn Header="Changes?" Binding="{Binding HasChange}" />
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate >
+                        <DataTemplate >
+                            <CheckBox IsChecked="{Binding HasChange,UpdateSourceTrigger=PropertyChanged}"   />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
 
             <DataGrid.RowDetailsTemplate>

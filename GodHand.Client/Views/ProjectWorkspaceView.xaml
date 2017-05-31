@@ -81,7 +81,6 @@
 
 
         <DataGrid Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="7"  Name="Collection" SelectedItem="{Binding SelectedCollection}" Margin="5" AutoGenerateColumns="False" SelectionMode="Single"
-                  EnableRowVirtualization="True" EnableColumnVirtualization="True"
                   cal:Message.Attach="
                   [Event CellEditEnding] = [Action Dg_CellEditEnding($eventArgs)]" CanUserDeleteRows="False">
             <DataGrid.Columns>
@@ -89,7 +88,13 @@
                 <DataGridTextColumn Header="Length" Binding="{Binding ByteValueLength, Mode=OneWay}" />
                 <DataGridTextColumn Header="New Value" Binding="{Binding NewValue, ValidatesOnExceptions=True}" />
                 <DataGridTextColumn Header="New Length" Binding="{Binding NewValueLength, Mode=OneWay}" />
-                <DataGridCheckBoxColumn Header="Changes?" Binding="{Binding HasChange}" />
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate >
+                        <DataTemplate >
+                            <CheckBox IsChecked="{Binding HasChange,UpdateSourceTrigger=PropertyChanged}"   />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
 
             <DataGrid.RowDetailsTemplate>

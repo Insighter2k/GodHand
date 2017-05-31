@@ -119,7 +119,8 @@ namespace GodHand.Client.ViewModels
                     if (value?.EnglishTranslation == null && Sources.Settings.EnableGoogleTranslation)
                         value.EnglishTranslation = Shared.IO.Convert.ToEnglish(value.CurrentValue);
                 }
-                NotifyOfPropertyChange(() => SelectedCollection);               
+                NotifyOfPropertyChange(() => SelectedCollection);
+                NotifyOfPropertyChange(() => CanBtnSaveFile);
             }
         }
 
@@ -171,8 +172,8 @@ namespace GodHand.Client.ViewModels
             Write.ValueToFile(LblSelectedFile, collection);
         }
 
-        public bool CanBtnSaveFile => new ObservableCollection<ByteInformation>(
-            Collection.Where(x => x.HasChange)).Any() && !_isOpening;
+        public bool CanBtnSaveFile => (new ObservableCollection<ByteInformation>(
+            Collection.Where(x => x.HasChange)).Any() && !_isOpening);
 
         #endregion
 

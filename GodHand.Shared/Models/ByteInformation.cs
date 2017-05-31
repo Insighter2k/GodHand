@@ -21,6 +21,7 @@ namespace GodHand.Shared.Models
                 {
                     _newValue = value;
                     OnPropertyChanged(nameof(NewValueLength));
+                    OnPropertyChanged(nameof(NewValue));
                 }
             }
         }
