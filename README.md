@@ -56,7 +56,7 @@ If you create a project, a folder will be created in the subfolder "projects".
 This feature is the first step to maintain translations and future releases with patches for the community.
 
 ### Project Workspace
-If you have created your project, you can select it from the titlebar and if you click on it, a tabitem will be added with the project name. In this workspace, you will have on the left side a navigator into your given rootpath, for the underlying folder and file structures.On the right side is the result table where you can act like in the Tab "File".
+If you have created your project, you can select it from the titlebar and if you click on it, a tabitem will be added with the project name. In this workspace, you will have on the left side a navigator into your given rootpath, for the underlying folder and file structures.On the right side is the result table where you can act like in the Tab "File". You have to double click on the selected file to open the file.
 
 ## Pre-Requisites
 You need Windows with .NET Framework 4.5.2. Then you are set to go.
