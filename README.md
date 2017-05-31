@@ -23,6 +23,17 @@ If you click on a row, a *detailed row* will be shown with the following content
 - Romaji Translation: Depending on the content of "Current Value", it tries to translate it to romaji. I am not sure about whole sentences. Translation is started when selected row changes.
 - Google English Translation: It tries to translate it to english via the google api. Translation is started when selected row changes.
 
+#### Encoder
+You can now use a custom encoder. In the root folder, you can place any .txt file which contains the format *{HexValue;Output Character}*, in the folder *encoding*.
+It is currently limited to max 3 bytes. 
+
+For example
+FF FF FF  => 3 bytes
+FF FF     => 2 bytes
+FF        => 1 byte
+
+It is still an alpha version. It needs to be tested for stable release. Please feel free to test it and giving feedback.
+
 ### Tab OCR
 This is quite straight forwarded. You click on "Load Image" and select your japanese image file you want to translate.
 If the image has been loaded, you can create a rectangle with your mouse (button down) on that image. If you have marked your text, let your mouse button go and wait a few seconds to load the Capture2Text result in the "Input" textbox. It will automaticall try to translate via google api into english. You might need to redo the steps for a good result.
