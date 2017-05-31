@@ -28,9 +28,9 @@ You can now use a custom encoder. In the root folder, you can place any .txt fil
 It is currently limited to max 3 bytes. 
 
 For example
-FF FF FF  => 3 bytes
-FF FF     => 2 bytes
-FF        => 1 byte
+- E44E1E;丞  => 3 bytes
+- E015;ガ  => 2 bytes
+- 01;0  => 1 byte
 
 It is still an alpha version. It needs to be tested for stable release. Please feel free to test it and giving feedback.
 
@@ -46,9 +46,11 @@ You need Windows with .NET Framework 4.5.2. Then you are set to go.
 
 
 ## Possible Tasks
-- [ ] Custom encoding-tables
+- [x] Custom encoding-tables (Alpha Version)
 - [x] OCR-support?
 - [ ] Adding other translations APIs
+- [ ] Creating a project folder structure
+- [ ] Adding a release patch management functionality
 
 ## Thanks
 @linguanostra for providing the .NET wrapper for the KAKASI tool which is doing the romaji translation for you :+1:
