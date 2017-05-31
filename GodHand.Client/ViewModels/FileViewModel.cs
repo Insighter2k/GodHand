@@ -162,6 +162,13 @@ namespace GodHand.Client.ViewModels
             ObservableCollection<ByteInformation> collection = new ObservableCollection<ByteInformation>(
                 Collection.Where(x => x.HasChange));
 
+            if (!File.Exists(LblSelectedFile + ".bak"))
+            {
+                var dlgResult = MessageBox.Show("Do you want to make a backup file of the original file?",
+                    "Generating Backup", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if(dlgResult == DialogResult.Yes) File.Copy(LblSelectedFile, LblSelectedFile+".bak");
+            }
+
             Write.ValueToFile(LblSelectedFile, collection);
         }
 
