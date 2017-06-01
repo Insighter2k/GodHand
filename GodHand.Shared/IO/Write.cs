@@ -36,12 +36,12 @@ namespace GodHand.Shared.IO
             }
         }
 
-        public static void ValueToFile(string path,List<Tuple<int,int, string>> list)
+        public static void ValueToFile(string path,ObservableCollection<Patch> collection)
         {
             List<string> content = new List<string>();
-            foreach (var item in list)
+            foreach (var item in collection)
             {
-                content.Add(string.Concat(item.Item1.ToString(),",",item.Item2.ToString(), ",", item.Item3));
+                content.Add(string.Concat(item.ByteLength.ToString(),",",item.StartPosition.ToString(), ",", item.Value));
             }
 
             File.WriteAllLines(path, content);
@@ -51,7 +51,7 @@ namespace GodHand.Shared.IO
         {
             using (Stream fStr = new FileStream(path, FileMode.Open, FileAccess.Write, FileShare.None))
             {
-                BinaryWriter bWriter = new BinaryWriter(fStr, Encoding.UTF8);
+                BinaryWriter bWriter = new BinaryWriter(fStr, Encoding.ASCII);
 
                 foreach (var item in collection)
                 {

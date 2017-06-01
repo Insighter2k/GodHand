@@ -189,13 +189,18 @@ namespace GodHand.Client.ViewModels
 
         public void BtnSaveFile()
         {
-            List<Tuple<int, int, string>> results = Collection.Where(x => x.HasChange || x.PatchValue != null)
-                .Select(x => new Tuple<int, int, string>(x.ByteValueLength, x.StartPosition,
-                    Shared.IO.Convert.StringToHex(x.NewValue)))
-                .ToList();
+            ObservableCollection<Patch> collection = new ObservableCollection<Patch>(Collection
+                .Where(x => x.HasChange || x.PatchValue != null)
+                .Select(x => new Patch()
+                {
+                    ByteLength = x.ByteValueLength,
+                    StartPosition = x.StartPosition,
+                    Value = (x.PatchValue == null) ? Shared.IO.Convert.StringToHex(x.NewValue) : Shared.IO.Convert.StringToHex(x.PatchValue)
+                }));
+                
 
             Directory.CreateDirectory(_patchFileDirectoryPath);
-            Write.ValueToFile(_patchFilePath, results);
+            Write.ValueToFile(_patchFilePath, collection);
         }
 
 

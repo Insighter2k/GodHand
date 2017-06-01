@@ -85,10 +85,10 @@ namespace GodHand.Shared.IO
             string value = null;
             using (Stream fStr = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
-                BinaryReader bReader = new BinaryReader(fStr, Encoding.UTF8);
+                BinaryReader bReader = new BinaryReader(fStr, Encoding.ASCII);
 
                 byte[] bytes = bReader.ReadBytes(System.Convert.ToInt32(bReader.BaseStream.Length));
-                value = Encoding.GetEncoding(932).GetString(bytes);
+                value = Encoding.ASCII.GetString(bytes);
             }
 
             if (value != null)
