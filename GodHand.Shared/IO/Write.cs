@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Security.AccessControl;
 using System.Text;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -33,17 +33,49 @@ namespace GodHand.Shared.IO
                     bWriter.Seek(bi.StartPosition, SeekOrigin.Begin);
                     bWriter.Write(byteArray, 0, byteArray.Length);
                 }
-
-
             }
         }
+
+        public static void ValueToFile(string path,List<Tuple<int,int, string>> list)
+        {
+            List<string> content = new List<string>();
+            foreach (var item in list)
+            {
+                content.Add(string.Concat(item.Item1.ToString(),",",item.Item2.ToString(), ",", item.Item3));
+            }
+
+            File.WriteAllLines(path, content);
+        }
+
+        public static void PatchToFile(string path, ObservableCollection<Patch> collection)
+        {
+            using (Stream fStr = new FileStream(path, FileMode.Open, FileAccess.Write, FileShare.None))
+            {
+                BinaryWriter bWriter = new BinaryWriter(fStr, Encoding.UTF8);
+
+                foreach (var item in collection)
+                {
+                    string content = Convert.HexToString(item.Value);
+                    byte[] byteArray = new byte[item.ByteLength];
+
+                    for (int i = 0; i < content.Length; i++)
+                    {
+                        byteArray[i] = System.Convert.ToByte(content[i]);
+                    }
+
+                    bWriter.Seek(item.StartPosition, SeekOrigin.Begin);
+                    bWriter.Write(byteArray, 0, byteArray.Length);
+                }
+            }
+        }
+
 
         public static void Xml<T>(T item, string path)
         {
             using (var sw = new StreamWriter(path, false, Encoding.ASCII))
             {
                 XmlSerializer xml = new XmlSerializer(typeof(T));
-                xml.Serialize(sw,item);
+                xml.Serialize(sw, item);
             }
         }
 
@@ -63,7 +95,12 @@ namespace GodHand.Shared.IO
 
             Size size = new Size(_canvas.ActualWidth, _canvas.ActualHeight);
 
-            Rectangle rect = new Rectangle() { Width = _canvas.ActualWidth, Height = _canvas.ActualHeight, Fill = new VisualBrush(_canvas) };
+            Rectangle rect = new Rectangle()
+            {
+                Width = _canvas.ActualWidth,
+                Height = _canvas.ActualHeight,
+                Fill = new VisualBrush(_canvas)
+            };
             rect.Measure(size);
             rect.Arrange(new Rect(size));
             rect.UpdateLayout();
@@ -75,7 +112,7 @@ namespace GodHand.Shared.IO
             BitmapEncoder pngEncoder = new JpegBitmapEncoder();
             pngEncoder.Frames.Add(BitmapFrame.Create(crop));
 
-            using (var fs = File.OpenWrite(path+filename))
+            using (var fs = File.OpenWrite(path + filename))
             {
                 pngEncoder.Save(fs);
             }

@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using GodHand.Shared.Models;
 
 namespace GodHand.Client
 {

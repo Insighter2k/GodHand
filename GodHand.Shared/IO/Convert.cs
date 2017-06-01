@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -98,6 +97,31 @@ namespace GodHand.Shared.IO
 
                 return Result.ToString();
            
+        }
+
+        public static string StringToHex(string hexString)
+        {
+            var sb = new StringBuilder();
+
+            var bytes = Encoding.ASCII.GetBytes(hexString);
+            foreach (var t in bytes)
+            {
+                sb.Append(t.ToString("X2"));
+            }
+
+            return sb.ToString();
+        }
+
+        public static string HexToString(string hexString)
+        {
+            var bytes = new byte[hexString.Length / 2];
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                string currentHex = hexString.Substring(i * 2, 2);
+                bytes[i] = System.Convert.ToByte(currentHex, 16);
+            }
+
+            return Encoding.ASCII.GetString(bytes);
         }
 
         private static string _hexString = null;

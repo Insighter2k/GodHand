@@ -95,6 +95,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Patch Value" Binding="{Binding PatchValue, Mode=OneWay}" />
             </DataGrid.Columns>
 
             <DataGrid.RowDetailsTemplate>

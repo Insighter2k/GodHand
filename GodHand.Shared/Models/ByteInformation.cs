@@ -49,13 +49,16 @@ namespace GodHand.Shared.Models
             }
         }
 
-        public ByteInformation(byte[] byteValue, int startPosition, string currentValue)
+        public string PatchValue { get; }
+
+        public ByteInformation(byte[] byteValue, int startPosition, string currentValue, string patchValue)
         {
             ByteValue = byteValue;
             StartPosition = startPosition;
             CurrentValue = currentValue;
             NewValue = currentValue;
             HasChange = false;
+            PatchValue = patchValue;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

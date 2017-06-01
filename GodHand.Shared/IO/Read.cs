@@ -16,9 +16,10 @@ namespace GodHand.Shared.IO
 {
     public class Read
     {
-        public static ObservableCollection<ByteInformation> File(string path, long start, long length, string encoder)
+        public static ObservableCollection<ByteInformation> File(string path, long start, long length, string encoder, string patchPath)
         {
-            Encoding utf8Encoding = Encoding.UTF8;
+            ObservableCollection<Patch> patchCollection = PatchFile(patchPath);
+
             using (Stream fStr = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
                 Dictionary<string, string> dict = (encoder == "Default") ? null : Read.EncodingTable(encoder);
@@ -33,6 +34,7 @@ namespace GodHand.Shared.IO
 
                 List<byte> tempByteList = new List<byte>();
                 int i = -1;
+
                 for (int j = 0; j < bytes.Length; j++)
                 {
                     if (bytes[j] == 0 && tempByteList.Count == 0) continue;
@@ -42,8 +44,17 @@ namespace GodHand.Shared.IO
                         var currentValue = (encoder == "Default")
                             ? Encoding.GetEncoding(932).GetString(tempByteList.ToArray())
                             : Convert.ByteValueToCustomEncoding(tempByteList.ToArray(), dict);
-                        ByteInformation bi = new ByteInformation(tempByteList.ToArray(), j - tempByteList.Count,
-                            currentValue);
+
+                        var startPosition = j - tempByteList.Count;
+                        string patchValue = null;
+                        if (patchCollection.Count > 0)
+                        {
+                            var result = patchCollection.FirstOrDefault(x => x.StartPosition == startPosition);
+                            if (result != null) patchValue = Convert.HexToString(result.Value);
+                        }
+                        ByteInformation bi = new ByteInformation(tempByteList.ToArray(), startPosition,
+                            currentValue, patchValue);
+
                         lByteInformation.Add(bi);
                         tempByteList.Clear();
                     }
@@ -63,6 +74,41 @@ namespace GodHand.Shared.IO
                 }
                 return lByteInformation;
             }
+        }
+
+        public static ObservableCollection<Patch> PatchFile(string path)
+        {
+            ObservableCollection<Patch> collection = new ObservableCollection<Patch>();
+            if (path == null) return collection;
+            if (!System.IO.File.Exists(path)) return collection;
+
+            string value = null;
+            using (Stream fStr = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            {
+                BinaryReader bReader = new BinaryReader(fStr, Encoding.UTF8);
+
+                byte[] bytes = bReader.ReadBytes(System.Convert.ToInt32(bReader.BaseStream.Length));
+                value = Encoding.GetEncoding(932).GetString(bytes);
+            }
+
+            if (value != null)
+            {
+                var splittedValue = value.Split(new[] {"\r\n"}, StringSplitOptions.None);
+                foreach (var item in splittedValue)
+                {
+                    if (string.IsNullOrEmpty(item)) continue;
+                    string[] array = item.Split(',');
+                    Patch p = new Patch()
+                    {
+                        ByteLength = System.Convert.ToInt32(array[0]),
+                        StartPosition = System.Convert.ToInt32(array[1]),
+                        Value = array[2]
+                    };
+                    collection.Add(p);
+                }
+            }
+
+            return collection;
         }
 
         public static T Xml<T>(string path) where T : new()

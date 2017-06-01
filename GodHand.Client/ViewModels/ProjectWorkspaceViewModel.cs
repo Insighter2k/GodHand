@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using GodHand.Shared.IO;
 using GodHand.Shared.Models;
-using MessageBox = System.Windows.MessageBox;
 using Screen = Caliburn.Micro.Screen;
 using TreeViewItem = GodHand.Shared.Models.TreeViewItem;
 
@@ -25,17 +23,49 @@ namespace GodHand.Client.ViewModels
             _settings = settings;
         }
 
-        public static ProjectWorkspaceViewModel Create(string header, bool isSelected, ProjectSettings settings) => new ProjectWorkspaceViewModel(header, isSelected, settings);
+        public static ProjectWorkspaceViewModel Create(string header, bool isSelected,
+            ProjectSettings settings) => new ProjectWorkspaceViewModel(header, isSelected, settings);
 
         #region Interface
+
         public string Header { get; set; }
         public bool IsSelected { get; set; }
         public Screen Content => this;
+
         #endregion
 
         #region Properties
 
         private ProjectSettings _settings;
+
+        private string _patchFileDirectoryPath
+        {
+            get
+            {
+                if (SelectedListBoxItem != null)
+                {
+                    var outputPath = Environment.CurrentDirectory + @"\projects\" + _settings.Name + @"\";
+                    var filePath = $@"{SelectedListBoxItem.Fullpath.Replace(_settings.RootPath, "").Replace(SelectedListBoxItem.Name, "")}";
+
+                    return outputPath + filePath;
+                }
+                return null;
+            }
+        }
+        private string _patchFilePath
+        {
+            get
+            {
+                if (SelectedListBoxItem != null)
+                {
+                    var fileName = SelectedListBoxItem.Name + ".ghp";
+
+                    return _patchFileDirectoryPath+fileName;
+                }
+                return null;
+            }
+        }
+
 
         private int _controlWidth = 300;
         public int ControlWidth
@@ -152,25 +182,22 @@ namespace GodHand.Client.ViewModels
             Collection.Clear();
             await Task.Factory.StartNew(() =>
             {
-                Collection = Read.File(SelectedListBoxItem.Fullpath, TbxStartOffset, TbxOffsetLength, SelectedCmbEncoderTable);
+                Collection = Read.File(SelectedListBoxItem.Fullpath, TbxStartOffset, TbxOffsetLength, SelectedCmbEncoderTable, _patchFilePath);
             });
             IsOpening = false;
         }
 
         public void BtnSaveFile()
         {
-            ObservableCollection<ByteInformation> collection = new ObservableCollection<ByteInformation>(
-                Collection.Where(x => x.HasChange));
+            List<Tuple<int, int, string>> results = Collection.Where(x => x.HasChange || x.PatchValue != null)
+                .Select(x => new Tuple<int, int, string>(x.ByteValueLength, x.StartPosition,
+                    Shared.IO.Convert.StringToHex(x.NewValue)))
+                .ToList();
 
-            if (!File.Exists(SelectedListBoxItem.Fullpath + ".bak"))
-            {
-                var dlgResult = System.Windows.Forms.MessageBox.Show("Do you want to make a backup file of the original file?",
-                    "Generating Backup", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (dlgResult == DialogResult.Yes) File.Copy(SelectedListBoxItem.Fullpath, SelectedListBoxItem.Fullpath + ".bak");
-            }
-
-            Write.ValueToFile(SelectedListBoxItem.Fullpath, collection);
+            Directory.CreateDirectory(_patchFileDirectoryPath);
+            Write.ValueToFile(_patchFilePath, results);
         }
+
 
         public bool CanBtnSaveFile => (new ObservableCollection<ByteInformation>(
                                           Collection.Where(x => x.HasChange)).Any() && !_isOpening);

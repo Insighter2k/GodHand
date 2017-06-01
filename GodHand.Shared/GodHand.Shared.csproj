@@ -42,12 +42,14 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IO\Check.cs" />
     <Compile Include="IO\Convert.cs" />
     <Compile Include="IO\Write.cs" />
     <Compile Include="Models\ByteInformation.cs" />
     <Compile Include="IO\Read.cs" />
     <Compile Include="Models\DirectoryItem.cs" />
     <Compile Include="Models\FileItem.cs" />
+    <Compile Include="Models\Patch.cs" />
     <Compile Include="Models\ProjectSettings.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Models\TreeViewItem.cs" />

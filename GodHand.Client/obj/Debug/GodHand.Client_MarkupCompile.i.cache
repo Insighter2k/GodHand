@@ -1,0 +1,20 @@
+﻿GodHand.Client
+
+
+winexe
+C#
+.cs
+C:\Users\Insight\Documents\Visual Studio 2017\Projects\GodHand\GodHand.Client\obj\Debug\
+GodHand.Client
+none
+false
+DEBUG;TRACE
+C:\Users\Insight\Documents\Visual Studio 2017\Projects\GodHand\GodHand.Client\App.xaml
+122028795814
+
+221575292385
+72-81442262
+Resources\Icons.xaml;Resources\IconsNonShared.xaml;Views\MainView.xaml;Views\FileView.xaml;Views\OcrView.xaml;Views\PatchingView.xaml;Views\ProjectManagement\DeleteProjectView.xaml;Views\ProjectManagement\EditProjectView.xaml;Views\ProjectManagement\NewProjectView.xaml;Views\ProjectManagement\ProjectsView.xaml;Views\ProjectWorkspaceView.xaml;Views\SettingsView.xaml;
+
+False
+

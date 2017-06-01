@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows.Forms;
-using Caliburn.Micro;
-using GodHand.Shared.IO;
 using GodHand.Shared.Models;
 using Screen = Caliburn.Micro.Screen;
-using System.Windows.Input;
 using GodHand.Client.ViewModels.ProjectManagement;
 
 namespace GodHand.Client.ViewModels
@@ -51,18 +43,7 @@ namespace GodHand.Client.ViewModels
                 NotifyOfPropertyChange(() => SelectedCmbProjects);
             }
         }
-
-        //private ObservableCollection<Screen> _flyouts = new ObservableCollection<Screen>();
-        //public ObservableCollection<Screen> Flyouts
-        //{
-        //    get => _flyouts;
-        //    set
-        //    {
-        //        _flyouts = value;
-        //        NotifyOfPropertyChange(() => Flyouts);
-        //    }
-        //}
-
+        
         #endregion
 
         #region Methods
@@ -79,11 +60,7 @@ namespace GodHand.Client.ViewModels
         }
         public void BtnShowSettings()
         {
-            //var flyout = Flyouts[0];
-            //((IFlyout) flyout).IsOpen = !((IFlyout) flyout).IsOpen;
-            
-            ShowTabs(SettingsViewModel.Create("Settings", true));
-            
+            ShowTabs(SettingsViewModel.Create("Settings", true)); 
         }
 
         public void BtnProjectMgmt()
@@ -101,12 +78,12 @@ namespace GodHand.Client.ViewModels
 
         public void View_Loaded()
         {
-            //Flyouts.Add(SettingsViewModel.Create());
             Sources.Settings = Shared.IO.Read.Xml<Shared.Models.Settings>(Environment.CurrentDirectory+@"\Settings.xml");
             Sources.Projects = Shared.IO.Read.Xml<ObservableCollection<ProjectSettings>>(Environment.CurrentDirectory + @"\ProjectSettings.xml");
             CmbProjects = Sources.Projects;
             TabItems.Insert(TabItems.Count,FileViewModel.Create("File", true));
-            TabItems.Insert(TabItems.Count, OcrViewModel.Create("OCR", false)); 
+            TabItems.Insert(TabItems.Count, OcrViewModel.Create("OCR", false));
+            TabItems.Insert(TabItems.Count, PatchingViewModel.Create("Patching", false));
         }
 
         public void SplitButton_Click()

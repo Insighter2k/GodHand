@@ -94,9 +94,9 @@
     <Compile Include="ViewModels\IProjects.cs" />
     <Compile Include="ViewModels\ITabItem.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="ViewModels\IFlyout.cs" />
     <Compile Include="ViewModels\FileViewModel.cs" />
     <Compile Include="ViewModels\OcrViewModel.cs" />
+    <Compile Include="ViewModels\PatchingViewModel.cs" />
     <Compile Include="ViewModels\ProjectManagement\DeleteProjectViewModel.cs" />
     <Compile Include="ViewModels\ProjectManagement\EditProjectViewModel.cs" />
     <Compile Include="ViewModels\ProjectManagement\NewProjectViewModel.cs" />
@@ -124,6 +124,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\OcrView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PatchingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

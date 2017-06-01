@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Forms;
-using Caliburn.Micro;
 using GodHand.Shared.IO;
 using GodHand.Shared.Models;
 using Screen = Caliburn.Micro.Screen;
@@ -150,7 +149,7 @@ namespace GodHand.Client.ViewModels
             Collection.Clear();
             await Task.Factory.StartNew(() =>
             {
-                Collection = Read.File(LblSelectedFile, TbxStartOffset, TbxOffsetLength, SelectedCmbEncoderTable);
+                Collection = Read.File(LblSelectedFile, TbxStartOffset, TbxOffsetLength, SelectedCmbEncoderTable, null);
             });
             IsOpening = false;
         }
