@@ -81,6 +81,10 @@
 
 
         <DataGrid Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="7"  Name="Collection" SelectedItem="{Binding SelectedCollection}" Margin="5" AutoGenerateColumns="False" SelectionMode="Single"
+                  EnableRowVirtualization="True"
+                  EnableColumnVirtualization="false"
+                  VirtualizingStackPanel.VirtualizationMode="Standard"
+                  VirtualizingStackPanel.IsVirtualizing="True"                 
                   cal:Message.Attach="
                   [Event CellEditEnding] = [Action Dg_CellEditEnding($eventArgs)]" CanUserDeleteRows="False">
             <DataGrid.Columns>
