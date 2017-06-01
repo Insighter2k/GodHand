@@ -189,15 +189,24 @@ namespace GodHand.Client.ViewModels
 
         public void BtnSaveFile()
         {
-            ObservableCollection<Patch> collection = new ObservableCollection<Patch>(Collection
+            ObservableCollection<Patch> collection = new ObservableCollection<Patch>();
+            var collectionByteInfo = new ObservableCollection<ByteInformation>(Collection
                 .Where(x => x.HasChange || x.PatchValue != null)
-                .Select(x => new Patch()
-                {
-                    ByteLength = x.ByteValueLength,
-                    StartPosition = x.StartPosition,
-                    Value = (x.PatchValue == null) ? Shared.IO.Convert.StringToHex(x.NewValue) : Shared.IO.Convert.StringToHex(x.PatchValue)
-                }));
-                
+                .Select(x => x));
+
+            foreach (var item in collectionByteInfo)
+            {
+                Patch p = new Patch();
+
+                p.ByteLength = item.ByteValueLength;
+                p.StartPosition = item.StartPosition;
+                if (item.PatchValue == null) p.Value = Shared.IO.Convert.StringToHex(item.NewValue);
+                else if (item.PatchValue != null && item.HasChange)
+                    p.Value = Shared.IO.Convert.StringToHex(item.NewValue);
+                else if (item.PatchValue != null) p.Value = Shared.IO.Convert.StringToHex(item.PatchValue);
+                collection.Add(p);
+            }
+
 
             Directory.CreateDirectory(_patchFileDirectoryPath);
             Write.ValueToFile(_patchFilePath, collection);
