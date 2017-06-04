@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\GodHand.Shared",
+    "\\GodHand.Shared\\IO"
   ],
+  "SelectedNode": "\\GodHand.sln",
   "PreviewInSolutionExplorer": false
 }
