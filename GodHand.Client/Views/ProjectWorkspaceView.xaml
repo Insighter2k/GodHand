@@ -1,0 +1,195 @@
+﻿<controls:MetroContentControl x:Class="GodHand.Client.Views.ProjectWorkspaceView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:cal="http://www.caliburnproject.org"
+        xmlns:treeView="clr-namespace:GodHand.Shared.Models.TreeView;assembly=GodHand.Shared"
+        mc:Ignorable="d"
+        d:DesignHeight="300" d:DesignWidth="300"
+                              cal:Message.Attach="[Event Loaded]=[Action View_Loaded()]">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.RowSpan="2" Width="{Binding ControlWidth}">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <GroupBox Header="Folders">
+                <TreeView ItemsSource="{Binding TreeViewItems}" cal:Message.Attach="[Event SelectedItemChanged]=[Action TreeView_SelectedItemChanged($eventArgs)]" />
+            </GroupBox>
+
+            <GroupBox Grid.Row="1" Header="Files">
+                <ListBox ItemsSource="{Binding Files}" 
+                         cal:Message.Attach="[Event MouseDoubleClick]=[Action ListBox_MouseDoubleClick()]"
+                         SelectedItem="{Binding SelectedListBoxItem}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type treeView:FileItem}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="5" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Rectangle
+                            Width="16"
+                            Height="16">
+                                    <Rectangle.Fill>
+                                        <VisualBrush Visual="{StaticResource appbar_cabinet_files}" />
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                                <TextBlock Text="{Binding Path=Name}"
+                                   ToolTip="{Binding Path=Fullpath}"
+                                   Grid.Column="2" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </GroupBox>
+        </Grid>
+        
+        <Button Name="BtnShowHide" Grid.Column="1" Grid.RowSpan="2" Content="Hide / Show Folders and Files" Margin="0,5,0,5" FontSize="10">
+            <Button.LayoutTransform>
+                <RotateTransform CenterX="0.5" CenterY="0.5" Angle="90"/>
+            </Button.LayoutTransform>
+        </Button>
+
+        <Label Grid.Column="2" Grid.Row="0" Content="Encoding Table" FontWeight="Bold" VerticalContentAlignment="Center"/>
+        <ComboBox Grid.Column="3" Grid.Row="0" Name="CmbEncoderTable" SelectedItem="{Binding SelectedCmbEncoderTable}" 
+                  cal:Message.Attach="[Event DropDownOpened] = [Action Cmb_DropDownOpened()]" Margin="5"/>
+        <Label Grid.Column="4" Grid.Row="0" Content="Start Offset:" FontWeight="Bold" VerticalContentAlignment="Center"/>
+        <TextBox Grid.Column="5" Grid.Row="0" Name="TbxStartOffset" Margin="5" />
+        <Label Grid.Column="6" Grid.Row="0" Content="Offset Length:" FontWeight="Bold" VerticalContentAlignment="Center"/>
+        <TextBox Grid.Column="7" Grid.Row="0" Name="TbxOffsetLength" Margin="5" />
+        <Button Grid.Column="8" Name="BtnSaveFile" Content="Save File" Margin="5"/>
+
+
+        <DataGrid Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="7"  Name="Collection" SelectedItem="{Binding SelectedCollection}" Margin="5" AutoGenerateColumns="False" SelectionMode="Single"
+                  EnableRowVirtualization="True"
+                  EnableColumnVirtualization="false"
+                  VirtualizingStackPanel.VirtualizationMode="Standard"
+                  VirtualizingStackPanel.IsVirtualizing="True"                 
+                  cal:Message.Attach="
+                  [Event CellEditEnding] = [Action Dg_CellEditEnding($eventArgs)]" CanUserDeleteRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Current Value" Binding="{Binding CurrentValue, Mode=OneWay}" />
+                <DataGridTextColumn Header="Length" Binding="{Binding ByteValueLength, Mode=OneWay}" />
+                <DataGridTextColumn Header="New Value" Binding="{Binding NewValue, ValidatesOnExceptions=True}" />
+                <DataGridTextColumn Header="New Length" Binding="{Binding NewValueLength, Mode=OneWay}" />
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate >
+                        <DataTemplate >
+                            <CheckBox IsChecked="{Binding HasChange,UpdateSourceTrigger=PropertyChanged}"   />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Patch Value" Binding="{Binding PatchValue, Mode=OneWay}" />
+            </DataGrid.Columns>
+
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <Grid MaxHeight="400">
+                        <ScrollViewer>
+                            <DockPanel Background="CadetBlue">
+                                <StackPanel DockPanel.Dock="Left" Margin="5">
+                                    <TextBlock Text="Jisho Translation" FontWeight="Bold"/>
+
+                                    <ListView ItemsSource="{Binding JishoTranslation}" Margin="5">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="100" />
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition Height="Auto"/>
+                                                    </Grid.RowDefinitions>
+
+                                                    <TextBlock Grid.Column="0" Grid.Row="0" Text="Word / Reading" FontWeight="Bold" FontStyle="Italic" />
+                                                    <TextBlock Grid.Column="1" Grid.Row="0">
+                                                        <TextBlock.Text>
+                                                            <MultiBinding StringFormat=" {0} / {1}">
+                                                                <Binding Path="Japanese.Word"/>
+                                                                <Binding Path="Japanese.Reading"/>
+                                                            </MultiBinding>
+                                                        </TextBlock.Text>
+                                                    </TextBlock>
+
+                                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="English Definitions" FontWeight="Bold" />
+                                                    <ListView  Grid.Column="1" Grid.Row="1" ItemsSource="{Binding EnglishTranslations}">
+                                                        <ListView.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <StackPanel Background="CadetBlue">
+                                                                    <TextBlock>
+                                                                        <TextBlock.Text>
+                                                                            <MultiBinding StringFormat="Parts of Speech: {0}">
+                                                                                <Binding Path="PartsOfSpeech"/>
+                                                                            </MultiBinding>
+                                                                        </TextBlock.Text>
+                                                                    </TextBlock>
+                                                                    <TextBlock>
+                                                                        <TextBlock.Text>
+                                                                            <MultiBinding StringFormat="English Definitions: {0}">
+                                                                                <Binding Path="EnglishDefinitions"/>
+                                                                            </MultiBinding>
+                                                                        </TextBlock.Text>
+                                                                    </TextBlock>
+                                                                    <TextBlock Margin="0,0,0,5">
+                                                                        <TextBlock.Text>
+                                                                            <MultiBinding StringFormat="Restrictions: {0}">
+                                                                                <Binding Path="Restrictions"/>
+                                                                            </MultiBinding>
+                                                                        </TextBlock.Text>
+                                                                    </TextBlock>
+
+                                                                </StackPanel>
+                                                            </DataTemplate>
+                                                        </ListView.ItemTemplate>
+                                                    </ListView>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </StackPanel>
+                                <StackPanel DockPanel.Dock="Top" Margin="5">
+                                    <TextBlock Text="Romaji Translation" FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding RomajiTranslation}" Margin="5"/>
+                                </StackPanel>
+                                <StackPanel DockPanel.Dock="Left" Margin="5">
+                                    <StackPanel>
+                                        <TextBlock Text="Google English Translation" FontWeight="Bold"/>
+                                        <TextBlock Text="{Binding EnglishTranslation}" Margin="5" />
+                                    </StackPanel>
+                                </StackPanel>
+
+
+                            </DockPanel>
+                        </ScrollViewer>
+                    </Grid>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>
+
+    </Grid>
+</controls:MetroContentControl>
+
+
+

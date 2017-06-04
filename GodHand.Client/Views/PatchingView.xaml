@@ -1,0 +1,40 @@
+﻿<controls:MetroContentControl x:Class="GodHand.Client.Views.PatchingView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GodHand.Client.Views"
+      xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        
+        <Label Grid.Row="0" Grid.Column="0" Content="Target Path:" Margin="5" VerticalContentAlignment="Center"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding TargetPath}" Margin="5" />
+        <Button Name="BtnTarget" Grid.Row="0" Grid.Column="2" Content="..." Margin="5"/>
+
+        <Label Grid.Row="1" Grid.Column="0" Content="Patch Path:" Margin="5" VerticalContentAlignment="Center" />
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding PatchPath}" Margin="5" />
+        <Button Name="BtnPatch" Grid.Row="1" Grid.Column="2" Content="..." Margin="5"/>
+
+        <Button Name="BtnStart" Grid.Row="2" Grid.ColumnSpan="3" Content="Start" Margin="5"/>
+
+        <TextBox Grid.Row="3" Grid.ColumnSpan="3" Text="{Binding Output}" Margin="5" AcceptsReturn="True" AcceptsTab="True" IsReadOnly="True" TextWrapping="Wrap"  />
+
+
+    </Grid>
+</controls:MetroContentControl>
+

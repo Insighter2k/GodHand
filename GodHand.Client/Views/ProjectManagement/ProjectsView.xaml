@@ -1,0 +1,27 @@
+﻿<controls:MetroContentControl x:Class="GodHand.Client.Views.ProjectManagement.ProjectsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:cal="http://www.caliburnproject.org"
+        mc:Ignorable="d"
+        d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <controls:MetroAnimatedTabControl ItemsSource="{Binding TabItems}">
+            <controls:MetroAnimatedTabControl.ItemContainerStyle>
+                <Style BasedOn="{StaticResource {x:Type controls:MetroTabItem}}" TargetType="{x:Type controls:MetroTabItem}">
+                    <Setter Property="Header" Value="{Binding Header}" />
+                    <Setter Property="IsSelected" Value="{Binding IsSelected}" />
+                </Style>
+            </controls:MetroAnimatedTabControl.ItemContainerStyle>
+            <controls:MetroAnimatedTabControl.ContentTemplate>
+                <DataTemplate>
+                    <controls:MetroContentControl cal:View.Model="{Binding Content}"/>
+                </DataTemplate>
+
+            </controls:MetroAnimatedTabControl.ContentTemplate>
+        </controls:MetroAnimatedTabControl>
+    </Grid>
+</controls:MetroContentControl>
+

@@ -2,6 +2,7 @@
 <Settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <EnableRomajiTranslation>true</EnableRomajiTranslation>
   <EnableGoogleTranslation>true</EnableGoogleTranslation>
+  <EnableJishoTranslation>true</EnableJishoTranslation>
   <EnableKanjiToAscii>true</EnableKanjiToAscii>
   <EnableHiraganaToAscii>true</EnableHiraganaToAscii>
   <EnableKatakanaToAscii>true</EnableKatakanaToAscii>

@@ -4,17 +4,54 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-        xmlns:client="clr-namespace:GodHand.Client"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:cal="http://www.caliburnproject.org"
-        xmlns:viewModel="clr-namespace:GodHand.Client.ViewModels"
-        xmlns:views="clr-namespace:GodHand.Client.Views"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen" WindowState="Maximized"
                       cal:Message.Attach="[Event Loaded]=[Action View_Loaded()]">
     
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
+            
+            <Button Name="BtnSelectProject" >
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="15"
+                               Height="15"
+                               Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_list_select}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Margin="4 0 0 0"
+                               VerticalAlignment="Center"                               
+                               Text="Selected Project" />
+                    <controls:SplitButton
+                               VerticalAlignment="Center"
+                               BorderThickness="0"
+                               Background="#FF41B1E1"
+                               DisplayMemberPath="Name"
+                               ItemsSource="{Binding CmbProjects}" 
+                               SelectedItem="{Binding SelectedCmbProjects}"
+                               cal:Message.Attach="[Event Click]=[Action SplitButton_Click()]">
+                       
+                    </controls:SplitButton>
+                </StackPanel>
+            </Button>
+
+            <Button Name="BtnProjectMgmt" cal:Message.Attach="[Event Click] = [Action BtnProjectMgmt()]">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="15"
+                               Height="15"
+                               Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_book}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Margin="4 0 0 0"
+                               VerticalAlignment="Center"                               
+                               Text="Project Mgmt" />
+                </StackPanel>
+            </Button>
+
             <Button Name="BtnShowSettings" cal:Message.Attach="[Event Click] = [Action BtnShowSettings()]">
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="15"

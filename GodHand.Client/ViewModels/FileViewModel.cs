@@ -1,11 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Forms;
-using Caliburn.Micro;
 using GodHand.Shared.IO;
 using GodHand.Shared.Models;
 using Screen = Caliburn.Micro.Screen;
@@ -24,13 +24,11 @@ namespace GodHand.Client.ViewModels
         #region Interface
 
         public string Header { get; set; }
-
         public bool IsSelected { get; set; }
         public Screen Content => this;
 
         #endregion
         #region Properties
-
         private bool _isOpening;
         private bool IsOpening
         {
@@ -68,16 +66,8 @@ namespace GodHand.Client.ViewModels
             }
         }
 
-        private string _lblLastChange;
-        public string LblLastChange
-        {
-            get => _lblLastChange;
-            set
-            {
-                _lblLastChange = value;
-                NotifyOfPropertyChange(() => LblLastChange);
-            }
-        }
+        public List<string> CmbEncoderTable { get; } = new List<string>() {"Default"};
+        public string SelectedCmbEncoderTable { get; set; } = "Default";
 
         private long _tbxStartOffset = -1;
         public long TbxStartOffset
@@ -120,9 +110,19 @@ namespace GodHand.Client.ViewModels
             set
             {
                 _selectedCollection = value;
-                if (value.RomajiTranslation == null && Sources.Settings.EnableRomajiTranslation) value.RomajiTranslation = Shared.IO.Convert.ToRomaji(value.CurrentValue, Sources.Settings);
-                if (value.EnglishTranslation == null && Sources.Settings.EnableGoogleTranslation) value.EnglishTranslation = Shared.IO.Convert.ToEnglish(value.CurrentValue);
-                NotifyOfPropertyChange(() => SelectedCollection);               
+                if (value != null)
+                {
+                    if (value.RomajiTranslation == null && Sources.Settings.EnableRomajiTranslation)
+                        value.RomajiTranslation = Shared.IO.Convert.ToRomaji(value.CurrentValue, Sources.Settings);
+                 
+                    if (value.EnglishTranslation == null && Sources.Settings.EnableGoogleTranslation)
+                        value.EnglishTranslation = Shared.IO.Convert.ToEnglish(value.CurrentValue);
+
+                    if(value.JishoTranslation == null && Sources.Settings.EnableJishoTranslation)
+                        value.JishoTranslation = Shared.IO.Convert.ToJisho(value.CurrentValue);
+                }
+                NotifyOfPropertyChange(() => SelectedCollection);
+                NotifyOfPropertyChange(() => CanBtnSaveFile);
             }
         }
 
@@ -141,7 +141,6 @@ namespace GodHand.Client.ViewModels
                 FileInfo fi = new FileInfo(openFileDialog.FileName);
                 LblSelectedFile = fi.FullName;
                 LblFilesize = $"{(fi.Length / 1000)} KB";
-                LblLastChange = fi.LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss");
             }
         }
 
@@ -150,9 +149,10 @@ namespace GodHand.Client.ViewModels
         public async void BtnOpenFile()
         {
             IsOpening = true;
+            Collection.Clear();
             await Task.Factory.StartNew(() =>
             {
-                Collection = Read.File(LblSelectedFile, TbxStartOffset, TbxOffsetLength);
+                Collection = Read.File(LblSelectedFile, TbxStartOffset, TbxOffsetLength, SelectedCmbEncoderTable, null);
             });
             IsOpening = false;
         }
@@ -164,16 +164,22 @@ namespace GodHand.Client.ViewModels
             ObservableCollection<ByteInformation> collection = new ObservableCollection<ByteInformation>(
                 Collection.Where(x => x.HasChange));
 
+            if (!File.Exists(LblSelectedFile + ".bak"))
+            {
+                var dlgResult = MessageBox.Show("Do you want to make a backup file of the original file?",
+                    "Generating Backup", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if(dlgResult == DialogResult.Yes) File.Copy(LblSelectedFile, LblSelectedFile+".bak");
+            }
+
             Write.ValueToFile(LblSelectedFile, collection);
         }
 
-        public bool CanBtnSaveFile => new ObservableCollection<ByteInformation>(
-            Collection.Where(x => x.HasChange)).Any() && !_isOpening;
+        public bool CanBtnSaveFile => (new ObservableCollection<ByteInformation>(
+            Collection.Where(x => x.HasChange)).Any() && !_isOpening);
 
         #endregion
 
         #region Events
-
         public void Dg_CellEditEnding(DataGridCellEditEndingEventArgs e)
         {
             var element = e.EditingElement as System.Windows.Controls.TextBox;
@@ -191,6 +197,15 @@ namespace GodHand.Client.ViewModels
             }
 
             return isCellValueValid;
+        }
+
+        public void Cmb_DropDownOpened()
+        {
+            CmbEncoderTable.RemoveRange(1, CmbEncoderTable.Count-1);
+            var files = Directory.GetFiles(Environment.CurrentDirectory + @"\encoding\", "*.txt",
+                SearchOption.TopDirectoryOnly);
+
+            CmbEncoderTable.AddRange(files.Select(x=> x.Split('\\')[x.Split('\\').Length-1]));
         }
 
         #endregion

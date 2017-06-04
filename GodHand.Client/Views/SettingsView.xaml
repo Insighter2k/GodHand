@@ -1,4 +1,4 @@
-﻿<controls:MetroWindow x:Class="GodHand.Client.Views.SettingsView"
+﻿<controls:MetroContentControl x:Class="GodHand.Client.Views.SettingsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,21 +6,19 @@
              xmlns:local="clr-namespace:GodHand.Client.Views"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
-             d:DesignHeight="320" d:DesignWidth="600" ShowCloseButton="False" ShowMaxRestoreButton="False" ShowMinButton="False" BorderThickness="1" BorderBrush="Black" ResizeMode="NoResize" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
+             d:DesignHeight="320" d:DesignWidth="600">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+       
         <GroupBox Header="General" Margin="5">
             <StackPanel>
                 <CheckBox Content="Enable Romaji Translation" IsChecked="{Binding EnableRomajiTranslation}" Margin="5"/>
                 <CheckBox Content="Enable Google Translation" IsChecked="{Binding EnableGoogleTranslation}" Margin="5"/>
+                <CheckBox Content="Enable Jisho Translation" IsChecked="{Binding EnableJishoTranslation}" Margin="5"/>
             </StackPanel>
         </GroupBox>
         
@@ -45,8 +43,6 @@
                 <CheckBox Content="Romaji Conversion Hepburn (Checked) | Kunrei (Unchecked)" IsChecked="{Binding EnableHepburn}" Margin="5"/>
             </StackPanel>
         </GroupBox>
-
-        <Button Name="BtnClose" Grid.Row="1" Grid.ColumnSpan="3" Content="Close" Margin="5" />
     </Grid>
-</controls:MetroWindow>
+</controls:MetroContentControl>
 

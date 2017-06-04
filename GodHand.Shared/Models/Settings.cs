@@ -4,6 +4,7 @@
     {
         public bool EnableRomajiTranslation { get; set; }
         public bool EnableGoogleTranslation { get; set; }
+        public bool EnableJishoTranslation { get; set; }
         public bool EnableKanjiToAscii { get; set; }
         public bool EnableHiraganaToAscii { get; set; }
         public bool EnableKatakanaToAscii { get; set; }

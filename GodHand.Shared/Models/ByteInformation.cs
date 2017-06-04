@@ -1,6 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using GodHand.Shared.Annotations;
+using GodHand.Shared.Properties;
 
 namespace GodHand.Shared.Models
 {
@@ -21,13 +22,24 @@ namespace GodHand.Shared.Models
                 {
                     _newValue = value;
                     OnPropertyChanged(nameof(NewValueLength));
+                    OnPropertyChanged(nameof(NewValue));
                 }
             }
         }
-        public int NewValueLength => NewValue.Length;
+        public int NewValueLength
+        {
+            get
+            {
+                if (NewValue != null) return NewValue.Length;
+                return -1;
+            }
+        }
+
         public string RomajiTranslation { get; set; }
 
         public string EnglishTranslation { get; set; }
+
+        public List<Jisho.Jisho> JishoTranslation { get; set; }
 
         private bool _hasChange;
         public bool HasChange
@@ -40,13 +52,16 @@ namespace GodHand.Shared.Models
             }
         }
 
-        public ByteInformation(byte[] byteValue, int startPosition, string currentValue)
+        public string PatchValue { get; }
+
+        public ByteInformation(byte[] byteValue, int startPosition, string currentValue, string patchValue)
         {
             ByteValue = byteValue;
             StartPosition = startPosition;
             CurrentValue = currentValue;
             NewValue = currentValue;
             HasChange = false;
+            PatchValue = patchValue;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

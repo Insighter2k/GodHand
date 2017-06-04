@@ -91,11 +91,17 @@
     </ApplicationDefinition>
     <Compile Include="Bootstrap.cs" />
     <Compile Include="Sources.cs" />
+    <Compile Include="ViewModels\IProjects.cs" />
     <Compile Include="ViewModels\ITabItem.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="ViewModels\IFlyout.cs" />
     <Compile Include="ViewModels\FileViewModel.cs" />
     <Compile Include="ViewModels\OcrViewModel.cs" />
+    <Compile Include="ViewModels\PatchingViewModel.cs" />
+    <Compile Include="ViewModels\ProjectManagement\DeleteProjectViewModel.cs" />
+    <Compile Include="ViewModels\ProjectManagement\EditProjectViewModel.cs" />
+    <Compile Include="ViewModels\ProjectManagement\NewProjectViewModel.cs" />
+    <Compile Include="ViewModels\ProjectManagement\ProjectsViewModel.cs" />
+    <Compile Include="ViewModels\ProjectWorkspaceViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Page Include="Resources\Icons.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -118,6 +124,30 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\OcrView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PatchingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProjectManagement\DeleteProjectView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ProjectManagement\EditProjectView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ProjectManagement\NewProjectView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProjectManagement\ProjectsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProjectWorkspaceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
