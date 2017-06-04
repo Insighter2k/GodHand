@@ -18,6 +18,7 @@
             <StackPanel>
                 <CheckBox Content="Enable Romaji Translation" IsChecked="{Binding EnableRomajiTranslation}" Margin="5"/>
                 <CheckBox Content="Enable Google Translation" IsChecked="{Binding EnableGoogleTranslation}" Margin="5"/>
+                <CheckBox Content="Enable Jisho Translation" IsChecked="{Binding EnableJishoTranslation}" Margin="5"/>
             </StackPanel>
         </GroupBox>
         

@@ -7,10 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
-using System.Windows.Documents;
 using System.Xml;
 using System.Xml.Serialization;
 using GodHand.Shared.Models;
+using GodHand.Shared.Models.TreeView;
 
 namespace GodHand.Shared.IO
 {

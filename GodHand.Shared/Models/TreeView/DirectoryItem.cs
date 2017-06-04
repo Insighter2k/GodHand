@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace GodHand.Shared.Models
+namespace GodHand.Shared.Models.TreeView
 {
     public class DirectoryItem : TreeViewItem
     {

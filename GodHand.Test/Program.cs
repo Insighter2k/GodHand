@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using GodHand.Shared.Models;
+using GodHand.Shared.Models.TreeView;
 
 
 namespace GodHand.Test
@@ -49,14 +49,13 @@ namespace GodHand.Test
             //Console.WriteLine("Original: " + original3);
             //Console.WriteLine("Custom: " + custom3);
 
-            var items = GetDicItems(@"C:\temp");
-
-         
-
-            
+            var ro = JishoCSharpWrapper.Shared.Client.RequestValuesFromJisho("name", false).Result;
+ 
 
 
-            Console.WriteLine();
+
+
+             Console.WriteLine();
             Console.WriteLine();
  
 

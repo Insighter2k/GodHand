@@ -1,4 +1,4 @@
-﻿namespace GodHand.Shared.Models
+﻿namespace GodHand.Shared.Models.TreeView
 {
     public class FileItem : TreeViewItem
     {

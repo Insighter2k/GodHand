@@ -29,7 +29,6 @@ namespace GodHand.Client.ViewModels
 
         #endregion
         #region Properties
-
         private bool _isOpening;
         private bool IsOpening
         {
@@ -113,10 +112,14 @@ namespace GodHand.Client.ViewModels
                 _selectedCollection = value;
                 if (value != null)
                 {
-                    if (value?.RomajiTranslation == null && Sources.Settings.EnableRomajiTranslation)
+                    if (value.RomajiTranslation == null && Sources.Settings.EnableRomajiTranslation)
                         value.RomajiTranslation = Shared.IO.Convert.ToRomaji(value.CurrentValue, Sources.Settings);
-                    if (value?.EnglishTranslation == null && Sources.Settings.EnableGoogleTranslation)
+                 
+                    if (value.EnglishTranslation == null && Sources.Settings.EnableGoogleTranslation)
                         value.EnglishTranslation = Shared.IO.Convert.ToEnglish(value.CurrentValue);
+
+                    if(value.JishoTranslation == null && Sources.Settings.EnableJishoTranslation)
+                        value.JishoTranslation = Shared.IO.Convert.ToJisho(value.CurrentValue);
                 }
                 NotifyOfPropertyChange(() => SelectedCollection);
                 NotifyOfPropertyChange(() => CanBtnSaveFile);
@@ -177,7 +180,6 @@ namespace GodHand.Client.ViewModels
         #endregion
 
         #region Events
-
         public void Dg_CellEditEnding(DataGridCellEditEndingEventArgs e)
         {
             var element = e.EditingElement as System.Windows.Controls.TextBox;

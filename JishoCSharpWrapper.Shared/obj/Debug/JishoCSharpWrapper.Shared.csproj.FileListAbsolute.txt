@@ -1,0 +1,5 @@
+C:\Users\Insight\Documents\Visual Studio 2017\Projects\JishoCSharpWraper\JishoCSharpWrapper.Shared\bin\Debug\JishoCSharpWrapper.Shared.dll
+C:\Users\Insight\Documents\Visual Studio 2017\Projects\JishoCSharpWraper\JishoCSharpWrapper.Shared\bin\Debug\JishoCSharpWrapper.Shared.pdb
+C:\Users\Insight\Documents\Visual Studio 2017\Projects\JishoCSharpWraper\JishoCSharpWrapper.Shared\obj\Debug\JishoCSharpWrapper.Shared.csprojResolveAssemblyReference.cache
+C:\Users\Insight\Documents\Visual Studio 2017\Projects\JishoCSharpWraper\JishoCSharpWrapper.Shared\obj\Debug\JishoCSharpWrapper.Shared.dll
+C:\Users\Insight\Documents\Visual Studio 2017\Projects\JishoCSharpWraper\JishoCSharpWrapper.Shared\obj\Debug\JishoCSharpWrapper.Shared.pdb

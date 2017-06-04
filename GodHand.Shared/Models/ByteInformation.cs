@@ -1,6 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using GodHand.Shared.Annotations;
+using GodHand.Shared.Properties;
 
 namespace GodHand.Shared.Models
 {
@@ -37,6 +38,8 @@ namespace GodHand.Shared.Models
         public string RomajiTranslation { get; set; }
 
         public string EnglishTranslation { get; set; }
+
+        public List<Jisho.Jisho> JishoTranslation { get; set; }
 
         private bool _hasChange;
         public bool HasChange

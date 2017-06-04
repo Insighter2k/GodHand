@@ -53,6 +53,10 @@
       <Project>{3c184ae4-3824-4613-9bcf-ce86142536f3}</Project>
       <Name>GodHand.Shared</Name>
     </ProjectReference>
+    <ProjectReference Include="..\JishoCSharpWrapper.Shared\JishoCSharpWrapper.Shared.csproj">
+      <Project>{8983d784-6860-4c64-9908-8d59f032eff3}</Project>
+      <Name>JishoCSharpWrapper.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

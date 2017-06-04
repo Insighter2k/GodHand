@@ -83,6 +83,11 @@ namespace GodHand.Client.ViewModels
             get => Sources.Settings.EnableGoogleTranslation;
             set => Sources.Settings.EnableGoogleTranslation = value;
         }
+        public bool EnableJishoTranslation
+        {
+            get => Sources.Settings.EnableJishoTranslation;
+            set => Sources.Settings.EnableJishoTranslation = value;
+        }
 
         public bool EnableKanjiToAscii
         {

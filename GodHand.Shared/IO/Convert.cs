@@ -5,6 +5,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using GodHand.Shared.Models;
+using GodHand.Shared.Models.Jisho;
+using JishoCSharpWrapper.Shared.Models.API;
 
 namespace GodHand.Shared.IO
 {
@@ -82,6 +84,49 @@ namespace GodHand.Shared.IO
             }
 
             return filteredResult;
+        }
+
+        public static List<Jisho> ToJisho(string value)
+        {
+            List<Jisho> jishoList = new List<Jisho>();
+            RootObject ro = JishoCSharpWrapper.Shared.Client.RequestValuesFromJisho(value, false).Result;
+
+            if (ro.data.Count > 0)
+            {
+                foreach (var item in ro.data)
+                {
+                    Jisho jisho = new Jisho();
+
+                    jisho.Japanese.Reading = item.japanese[0].reading;
+                    jisho.Japanese.Word = item.japanese[0].word;
+
+                    if (item.japanese.Count > 1)
+                    {
+                        for (int i = 1; i < item.japanese.Count; i++)
+                        {
+                            jisho.OtherForms.Add(new Models.Jisho.Japanese()
+                            {
+                                Word = item.japanese[i].word,
+                                Reading = item.japanese[i].reading
+                            });
+                        }
+                    }
+
+                    for (int i = 0; i < item.senses.Count; i++)
+                    {
+                        Sense sense = new Sense();
+
+
+                        sense.EnglishDefinitions = string.Join(",", item.senses[i].english_definitions);
+                        sense.PartsOfSpeech = string.Join(",", item.senses[i].parts_of_speech);
+                        jisho.EnglishTranslations.Add(sense);
+                    }
+                    jishoList.Add(jisho);
+                }
+
+            }
+
+            return jishoList;
         }
 
         public static string ByteArrayToHex(byte[] bytes)

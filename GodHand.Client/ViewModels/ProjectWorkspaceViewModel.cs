@@ -6,11 +6,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Forms;
 using GodHand.Shared.IO;
 using GodHand.Shared.Models;
 using Screen = Caliburn.Micro.Screen;
-using TreeViewItem = GodHand.Shared.Models.TreeViewItem;
+using TreeViewItem = GodHand.Shared.Models.TreeView.TreeViewItem;
 
 namespace GodHand.Client.ViewModels
 {
@@ -148,10 +147,12 @@ namespace GodHand.Client.ViewModels
                 _selectedCollection = value;
                 if (value != null)
                 {
-                    if (value?.RomajiTranslation == null && Sources.Settings.EnableRomajiTranslation)
+                    if (value.RomajiTranslation == null && Sources.Settings.EnableRomajiTranslation)
                         value.RomajiTranslation = Shared.IO.Convert.ToRomaji(value.CurrentValue, Sources.Settings);
-                    if (value?.EnglishTranslation == null && Sources.Settings.EnableGoogleTranslation)
+                    if (value.EnglishTranslation == null && Sources.Settings.EnableGoogleTranslation)
                         value.EnglishTranslation = Shared.IO.Convert.ToEnglish(value.CurrentValue);
+                    if (value.JishoTranslation == null && Sources.Settings.EnableJishoTranslation)
+                        value.JishoTranslation = Shared.IO.Convert.ToJisho(value.CurrentValue);
                 }
                 NotifyOfPropertyChange(() => SelectedCollection);
                 NotifyOfPropertyChange(() => CanBtnSaveFile);

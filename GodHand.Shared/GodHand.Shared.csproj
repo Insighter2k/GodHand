@@ -47,16 +47,23 @@
     <Compile Include="IO\Write.cs" />
     <Compile Include="Models\ByteInformation.cs" />
     <Compile Include="IO\Read.cs" />
-    <Compile Include="Models\DirectoryItem.cs" />
-    <Compile Include="Models\FileItem.cs" />
+    <Compile Include="Models\Jisho\Japanese.cs" />
+    <Compile Include="Models\Jisho\Sense.cs" />
+    <Compile Include="Models\TreeView\DirectoryItem.cs" />
+    <Compile Include="Models\TreeView\FileItem.cs" />
+    <Compile Include="Models\Jisho\Jisho.cs" />
     <Compile Include="Models\Patch.cs" />
     <Compile Include="Models\ProjectSettings.cs" />
     <Compile Include="Models\Settings.cs" />
-    <Compile Include="Models\TreeViewItem.cs" />
+    <Compile Include="Models\TreeView\TreeViewItem.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\JishoCSharpWrapper.Shared\JishoCSharpWrapper.Shared.csproj">
+      <Project>{8983d784-6860-4c64-9908-8d59f032eff3}</Project>
+      <Name>JishoCSharpWrapper.Shared</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Kakasi.Net\Kakasi.NET.Interop\Kakasi.NET.Interop.csproj">
       <Project>{67f3daa6-417d-4f5d-81c4-a191b04f917b}</Project>
       <Name>Kakasi.NET.Interop</Name>
