@@ -3,7 +3,7 @@ A tool for translating the japanese language to romaji and english language. Thi
 
 ## What does the program offer to you?
 This tool lets you analyze and edit (3ds) files. To be specific, sort of .dat files.
-It reads japanese characters like hiragana, katakana, kanjis and kana. I have added two inbuild translators which lets you translate it to romaji and english.
+It reads japanese characters like hiragana, katakana, kanjis and kana. I have added three inbuild translators which lets you translate it to romaji and english.
 It shall help you to locate the japanese words / sentences and offer you a first rough translation. You don't have to rely on this feature, but it can help you.
 
 Additionally, you can analyze common pictures formats and let an OCR do the translations.
@@ -33,6 +33,7 @@ You will find following columns:
 If you click on a row, a *detailed row* will be shown with the following content
 - Romaji Translation: Depending on the content of "Current Value", it tries to translate it to romaji. I am not sure about whole sentences. Translation is started when selected row changes.
 - Google English Translation: It tries to translate it to english via the google api. Translation is started when selected row changes.
+- Jisho Translation: Jisho will provide you with some additional information which the other two translators can't provide. Like english definitions, parts of speech, restriction ... .Translation is started when selected row changes.
 
 ### Tab OCR
 You can select a single picture file and let run the OCR over your desired selection for a direct translation. The success depends on the quality of your chosen picture!
