@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Web;
 using System.Windows.Forms;
 using GodHand.Shared.Models;
 using GodHand.Shared.Models.Jisho;
@@ -50,18 +51,19 @@ namespace GodHand.Shared.IO
             string filteredResult = string.Empty;
             try
             {
+                if(value.Contains("\\")) value = HttpUtility.UrlEncode(value);
                 var url = $"https://translate.googleapis.com/translate_a/single?client=gtx&sl=ja&tl=en&dt=t&q={value}";
-
+                   
+             
                 WebClient webClient = new WebClient();
-                webClient.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0");
-                webClient.Headers.Add(HttpRequestHeader.AcceptCharset, "UTF-8");
+                webClient.Headers.Add("user-agent", "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 " +
+                                             "(KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36");
 
-                webClient.Encoding = System.Text.Encoding.UTF8;
+                webClient.Encoding = Encoding.UTF8;
 
                 var result = webClient.DownloadString(url);
                 result = result.Replace(",null,null,3", "");
                 result = result.Replace(",null,\"ja\"", "");
-                result = result.Replace("\\n", "");
                 result = result.Replace("\\n", "");
 
                 MatchCollection matchCollection = regEx.Matches(result);

@@ -23,7 +23,7 @@ namespace GodHand.Shared.IO
             using (Stream fStr = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
                 Dictionary<string, string> dict = (encoder == "Default") ? null : Read.EncodingTable(encoder);
-                BinaryReader bReader = new BinaryReader(fStr);
+                BinaryReader bReader = new BinaryReader(fStr, Encoding.GetEncoding(932));
                 ObservableCollection<ByteInformation> lByteInformation = new ObservableCollection<ByteInformation>();
 
                 byte[] bytes;
@@ -45,6 +45,9 @@ namespace GodHand.Shared.IO
                             ? Encoding.GetEncoding(932).GetString(tempByteList.ToArray())
                             : Convert.ByteValueToCustomEncoding(tempByteList.ToArray(), dict);
 
+                        if (currentValue.Contains("\\n")) currentValue = currentValue.Replace("\\n", Environment.NewLine);
+                        if (currentValue.Contains("\\e")) currentValue = currentValue.Replace("\\e", ((Char)3).ToString());
+
                         var startPosition = j - tempByteList.Count;
                         string patchValue = null;
                         if (patchCollection.Count > 0)
@@ -60,18 +63,7 @@ namespace GodHand.Shared.IO
                     }
                     else tempByteList.Add(bytes[j]);
                 }
-
-                Regex regEx =
-                    new Regex(
-                        @"\p{IsHiragana}|\p{IsKatakana}|\p{IsKatakanaPhoneticExtensions}|\p{IsEnclosedCJKLettersandMonths}|\p{IsCJKSymbolsandPunctuation}");
-                for (int j = 0; j < lByteInformation.Count; j++)
-                {
-                    if (!regEx.IsMatch(lByteInformation[j].CurrentValue))
-                    {
-                        lByteInformation.RemoveAt(j);
-                        j--;
-                    }
-                }
+                
                 return lByteInformation;
             }
         }

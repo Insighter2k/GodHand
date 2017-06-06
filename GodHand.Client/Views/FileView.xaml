@@ -46,19 +46,8 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Current Value" Binding="{Binding CurrentValue, Mode=OneWay}" />
                 <DataGridTextColumn Header="Length" Binding="{Binding ByteValueLength, Mode=OneWay}" />
-                <DataGridTemplateColumn Header="New Value">
-                    <DataGridTemplateColumn.CellTemplate >
-                        <DataTemplate>
-                            <TextBox Text="{Binding NewValue,UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" IsReadOnly="True"/>
-                        </DataTemplate>
-                       </DataGridTemplateColumn.CellTemplate>
-                    <DataGridTemplateColumn.CellEditingTemplate>
-                        <DataTemplate>
-                            <TextBox Text="{Binding NewValue,UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellEditingTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Header="New Length" Binding="{Binding NewValueLength, Mode=OneWay}" />
+                 <DataGridTextColumn Header="New Value" Binding="{Binding NewValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridTextColumn Header="New Length" Binding="{Binding NewValueLength, Mode=OneWay}" />
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate >
                         <DataTemplate>
